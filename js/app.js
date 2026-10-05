@@ -256,8 +256,12 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       try {
-        // Invio al database Vercel Postgres tramite Serverless Function /api/submit-lead
-        const response = await fetch('/api/submit-lead', {
+        // Endpoint API: punta al backend Vercel anche quando visitato da GitHub Pages o locale
+        const apiEndpoint = window.location.origin.includes('vercel.app')
+          ? '/api/submit-lead'
+          : 'https://reska-immobiliare.vercel.app/api/submit-lead';
+
+        const response = await fetch(apiEndpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -283,21 +287,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
           form.reset();
         } else {
-          // Se Vercel Postgres non è ancora configurato con le credenziali, mostra comunque conferma rassicurante
-          console.warn('[Vercel Database Notice]:', result);
+          console.error('[Vercel Database Error]:', result);
           showToast(
-            'Richiesta Ricevuta!',
-            `Grazie ${leadName}, la tua richiesta è stata acquisita. Ti ricontatteremo entro 24 ore.`
+            'Attenzione: Database Non Connesso',
+            result.error || 'La variabile POSTGRES_URL non è ancora collegata al progetto su Vercel.',
+            true
           );
-          form.reset();
         }
       } catch (err) {
-        console.warn('[Network/Offline Fallback]:', err);
+        console.error('[Network Error]:', err);
         showToast(
-          'Richiesta Ricevuta!',
-          `Grazie ${leadName}, la tua richiesta è stata acquisita. Ti ricontatteremo entro 24 ore.`
+          'Errore di Connessione',
+          'Impossibile raggiungere il server. Verifica la connessione di rete.',
+          true
         );
-        form.reset();
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
