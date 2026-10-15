@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RESCA IMMOBILIARE - DESIGN SYSTEM & STYLESHEET
+   RESKA IMMOBILIARE - DESIGN SYSTEM & STYLESHEET
    Brand Colors: Vibrant Orange (#FF6600) & Crisp White (#FFFFFF)
    Mobile-First Architecture & High-Conversion Real Estate Design
    ========================================================================== */
@@ -375,6 +375,26 @@ button {
   align-items: center;
   gap: 12px;
   text-decoration: none;
+}
+
+.logo-brand-img {
+  height: 52px;
+  width: auto;
+  max-width: 175px;
+  object-fit: contain;
+  display: block;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.logo:hover .logo-brand-img {
+  transform: scale(1.02);
+}
+
+@media (max-width: 576px) {
+  .logo-brand-img {
+    height: 44px;
+    max-width: 150px;
+  }
 }
 
 .logo-symbol {
@@ -983,13 +1003,13 @@ select.form-control {
 
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 24px;
 }
 
 @media (min-width: 768px) {
   .metrics-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -1043,17 +1063,13 @@ select.form-control {
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
+  max-width: 1040px;
+  margin: 0 auto;
 }
 
 @media (min-width: 768px) {
   .properties-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .properties-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -1077,7 +1093,7 @@ select.form-control {
 
 .property-img-wrapper {
   position: relative;
-  height: 240px;
+  height: 260px;
   overflow: hidden;
   background-color: var(--secondary-dark);
 }
@@ -1086,11 +1102,12 @@ select.form-control {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   transition: transform 0.5s ease;
 }
 
 .property-card:hover .property-img {
-  transform: scale(1.07);
+  transform: scale(1.03);
 }
 
 .property-badge-status {
@@ -1816,6 +1833,26 @@ select.form-control {
 
 .modal-body {
   padding: 24px;
+}
+
+.modal-prop-desc p {
+  margin-bottom: 12px;
+  line-height: 1.65;
+}
+
+.modal-prop-desc ul {
+  margin: 10px 0 16px 18px;
+  padding-left: 0;
+}
+
+.modal-prop-desc li {
+  margin-bottom: 6px;
+  line-height: 1.55;
+  position: relative;
+}
+
+.modal-prop-desc strong {
+  color: var(--secondary-dark);
 }
 
 /* ==========================================================================

@@ -1,5 +1,5 @@
 /**
- * RESCA IMMOBILIARE - Core Application Logic
+ * RESKA IMMOBILIARE - Core Application Logic
  * Interactive Property Modals, Valuation Step Estimator & UI
  */
 
@@ -36,33 +36,49 @@ document.addEventListener('DOMContentLoaded', function () {
   const propertiesData = {
     '1': {
       id: 'PROP-01',
-      title: 'Attico Panoramico Terrazza Duomo',
-      location: 'Milano Centro / Duomo',
-      price: '€ 1.250.000',
-      specs: '165 mq • 3 Camere • 2 Bagni • Classe A4',
-      description: 'Splendido attico di pregio al sesto piano con ascensore diretto. Terrazza panoramica di 55 mq con vista aperta sulla città. Pavimentazione in parquet di rovere naturale a spina di pesce, tripli vetri a taglio termico, impianto domotico completo e cantina di pertinenza.',
-      image: 'images/property-1.jpg',
+      title: 'Intera Palazzina sulla Strada Parco',
+      location: 'Montesilvano (PE) • Prospiciente Strada Parco',
+      price: 'Trattativa Riservata',
+      specs: '~480 mq totali (120 mq per piano) • 4 Livelli • Mansarda con tetto nuovo • A pochi passi dalla Spiaggia',
+      description: `
+        <p>Montesilvano, in posizione privilegiata e altamente strategica prospiciente la rinomata isola ciclo-pedonale della <strong>Strada Parco</strong>, a brevissima distanza dalla spiaggia e da tutti i principali servizi cittadini.</p>
+        <p>Proponiamo prestigioso stabile cielo-terra anni '80 in ottime condizioni generali di manutenzione, disponibile per l'acquisto sia in blocco che con possibilità di frazionamento. La proprietà si articola su un livello seminterrato con comoda taverna e 3 ampi livelli fuori terra di circa 120 mq a piano, ideali per eleganti appartamenti indipendenti, studi professionali o attività ricettiva.</p>
+        <p>A coronare la palazzina, splendida mansarda con tetto in legno massello appena rifatto a nuovo (allo stato grezzo, pronta per finiture su misura). Straordinaria opportunità d'investimento ad altissimo potenziale di rivalutazione.</p>
+      `,
+      image: 'images/palazzina-strada-parco.jpg',
       badge: 'In Evidenza'
     },
     '2': {
       id: 'PROP-02',
-      title: 'Villa Contemporanea con Piscina e Parco',
-      location: 'Monza & Brianza / Parco',
-      price: '€ 1.890.000',
-      specs: '320 mq • 5 Camere • 4 Bagni • Giardino 1.200 mq',
-      description: 'Esclusiva villa unifamiliare di recentissima costruzione in classe energetica A+. Ampie vetrate a tutta altezza affacciate sul giardino piantumato e piscina a sfioro riscaldata. Rifiniture in pietra naturale e legno massello, impianto fotovoltaico con accumulo e garage quadruplo.',
-      image: 'images/property-2.jpg',
+      title: 'Nuova Costruzione: Trilocale A4 con Doppi Terrazzi',
+      location: 'Montesilvano (PE) • Via Marinelli',
+      price: 'Trattativa Riservata',
+      specs: '100 mq commerciali • 3° Piano • Classe A4 • Doppi Terrazzi • 2 Bagni • 100% Gas-Free',
+      description: `
+        <p>Nel cuore più servito e strategico di <strong>Montesilvano</strong>, in <strong>Via Marinelli</strong> — con accesso immediato a piedi a ogni servizio primario (supermercati, scuole, farmacie, fermate dei trasporti e a brevissima distanza dal mare e dalla Strada Parco) — proponiamo in vendita esclusivo <strong>appartamento trilocale in Classe Energetica A4</strong>, posizionato al terzo piano di un prestigioso edificio di nuova costruzione con linee architettoniche moderne e curate nei minimi dettagli.</p>
+        
+        <p><strong>Spazi Luminosi & Spettacolari Terrazzi Vivibili:</strong><br>
+        L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed è caratterizzato da una distribuzione degli ambienti impeccabile, studiata per massimizzare luminosità e vivibilità:</p>
+        <ul>
+          <li><strong>Zona Giorno:</strong> Ingresso accogliente che si apre su un luminoso soggiorno open space con angolo cottura a vista, incorniciato da ampie vetrate che conducono a uno splendido <em>doppio terrazzo abitabile</em> — ideale per cene all'aperto, aperitivi e momenti di relax in totale privacy — a cui si aggiunge un ulteriore balcone di servizio.</li>
+          <li><strong>Zona Notte:</strong> Comodo disimpegno che conduce alla <em>suite matrimoniale con elegante bagno padronale privato en-suite</em>, a una luminosa seconda camera ideale per figli o smart working, e al secondo raffinato bagno completo.</li>
+        </ul>
+
+        <p><strong>Efficienza Energetica A4 & Tecnologia 100% Gas-Free:</strong><br>
+        Una vera casa del futuro concepita per annullare gli sprechi, proteggere l'ambiente e azzerare i costi di gestione:</p>
+        <ul>
+          <li><strong>100% Gas-Free:</strong> Impianto autonomo a pompa di calore di ultima generazione per riscaldamento e raffrescamento a zero emissioni dirette.</li>
+          <li><strong>Solare Termico Autonomo Dedicato:</strong> 2 pannelli solari con 2 serbatoi di accumulo esclusivi per la produzione dell'acqua calda sanitaria del singolo appartamento.</li>
+          <li><strong>Impianto Fotovoltaico Condominiale:</strong> Per l'abbattimento drastico delle spese mensili di gestione delle parti comuni.</li>
+          <li><strong>Isolamento Termo-Acustico Totale:</strong> Cappotto termico ad alte prestazioni e infissi all'avanguardia con vetrocamera a <em>gas Argon</em>, capaci di garantire silenzio assoluto e comfort climatico ideale 365 giorni l'anno.</li>
+          <li><strong>Comfort Smart:</strong> Tapparelle elettriche motorizzate e coibentate.</li>
+          <li><strong>Finiture di Alto Pregio:</strong> Pavimenti e rivestimenti di design, dettagli contemporanei e capitolato di qualità superiore.</li>
+        </ul>
+
+        <p>Una proposta immobiliare introvabile sul mercato di Montesilvano, che unisce il privilegio di vivere a piedi ogni servizio, il comfort impagabile degli sfoghi esterni vivibili e la certezza della classe energetica A4, a tutela del valore del proprio investimento nel tempo.</p>
+      `,
+      image: 'images/casa2.webp',
       badge: 'Nuova Costruzione'
-    },
-    '3': {
-      id: 'PROP-03',
-      title: 'Loft di Design Soffitti Alti e Parquet',
-      location: 'Milano / Quartiere Isola',
-      price: '€ 780.000',
-      specs: '110 mq • 2 Camere • 2 Bagni • Finiture Superior',
-      description: 'Luminoso loft dal sapore industriale chic, sapientemente ristrutturato da studio di architettura. Soffitti alti 4.20 metri con travi a vista, zona soppalcata con cabina armadio, cucina con isola in marmo di Carrara e riscaldamento a pavimento.',
-      image: 'images/property-3.jpg',
-      badge: 'Esclusiva'
     }
   };
 
@@ -82,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('modalPropLocation').textContent = prop.location;
       document.getElementById('modalPropPrice').textContent = prop.price;
       document.getElementById('modalPropSpecs').textContent = prop.specs;
-      document.getElementById('modalPropDesc').textContent = prop.description;
+      document.getElementById('modalPropDesc').innerHTML = prop.description;
       document.getElementById('modalPropImg').src = prop.image;
       document.getElementById('modalPropBadge').textContent = prop.badge;
 
@@ -190,10 +206,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // 6. Toast Notification UI
   function showToast(title, message, isError = false) {
-    let toast = document.getElementById('resca-toast');
+    let toast = document.getElementById('reska-toast');
     if (!toast) {
       toast = document.createElement('div');
-      toast.id = 'resca-toast';
+      toast.id = 'reska-toast';
       toast.className = 'toast-notification';
       document.body.appendChild(toast);
     }
@@ -215,8 +231,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Expose global helpers
-  window.RescaApp = { showToast };
-  window.RescaTracker = { showToast };
+  window.ReskaApp = { showToast };
+  window.ReskaTracker = { showToast };
 
   // Privacy Policy Footer Link
   const privacyLink = document.getElementById('footerPrivacyLink');

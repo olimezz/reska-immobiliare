@@ -1,7 +1,7 @@
 {
   "name": "reska-immobiliare",
   "version": "1.0.0",
-  "description": "Landing page ufficiale ad alta conversione per RESCA IMMOBILIARE con Vercel Postgres",
+  "description": "Landing page ufficiale ad alta conversione per RESKA IMMOBILIARE con Vercel Postgres",
   "private": true,
   "type": "module",
   "scripts": {

@@ -1,6 +1,6 @@
-# RESCA IMMOBILIARE
+# RESKA IMMOBILIARE
 
-Landing page ufficiale ad alta conversione per **RESCA IMMOBILIARE**, agenzia specializzata nell'intermediazione, stima e compravendita di immobili residenziali e commerciali di pregio.
+Landing page ufficiale ad alta conversione per **RESKA IMMOBILIARE**, agenzia specializzata nell'intermediazione, stima e compravendita di immobili residenziali e commerciali di pregio.
 
 ## 🚀 Caratteristiche del Progetto
 - **Design Moderno & Reattivo**: Costruito con HTML5 semantico e Vanilla CSS personalizzato (palette arancione/bianco/antracite).
