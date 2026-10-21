@@ -36,7 +36,9 @@ export default async function handler(req, res) {
       stima_indicativa = '',
       immobile_nome = '',
       immobile_id = '',
-      note = ''
+      note = '',
+      privacy_consent = '',
+      marketing_consent = ''
     } = data || {};
 
     // Validazione base
@@ -46,6 +48,17 @@ export default async function handler(req, res) {
         error: 'Nome e numero di telefono sono campi obbligatori.'
       });
     }
+
+    // Validazione GDPR (Art. 6 e 7 Regolamento UE 2016/679)
+    const isPrivacyAccepted = privacy_consent === 'on' || privacy_consent === true || privacy_consent === 'true' || privacy_consent === '1';
+    if (!isPrivacyAccepted) {
+      return res.status(400).json({
+        success: false,
+        error: 'Conformità GDPR: È obbligatorio dichiarare di aver preso visione dell\'Informativa sulla Privacy per poter inviare la richiesta.'
+      });
+    }
+
+    const marketingConsentValue = (marketing_consent === 'on' || marketing_consent === true || marketing_consent === 'true' || marketing_consent === '1') ? 'acconsentito' : 'non_acconsentito';
 
     // Creazione automatica tabella se non esiste
     await sql`
@@ -64,11 +77,21 @@ export default async function handler(req, res) {
         stima_indicativa VARCHAR(100),
         immobile_nome VARCHAR(255),
         immobile_id VARCHAR(50),
-        note TEXT
+        note TEXT,
+        privacy_consent VARCHAR(50) DEFAULT 'acconsentito',
+        marketing_consent VARCHAR(50) DEFAULT 'non_acconsentito'
       );
     `;
 
-    // Inserimento lead in Vercel Postgres
+    // Aggiunta colonne retrocompatibile per tabelle già esistenti
+    try {
+      await sql`ALTER TABLE leads ADD COLUMN IF NOT EXISTS privacy_consent VARCHAR(50) DEFAULT 'acconsentito';`;
+      await sql`ALTER TABLE leads ADD COLUMN IF NOT EXISTS marketing_consent VARCHAR(50) DEFAULT 'non_acconsentito';`;
+    } catch (_alterErr) {
+      // Ignora se già presenti
+    }
+
+    // Inserimento lead in Vercel Postgres con tracciamento del consenso GDPR
     const result = await sql`
       INSERT INTO leads (
         form_type,
@@ -83,7 +106,9 @@ export default async function handler(req, res) {
         stima_indicativa,
         immobile_nome,
         immobile_id,
-        note
+        note,
+        privacy_consent,
+        marketing_consent
       ) VALUES (
         ${form_type},
         ${nome},
@@ -97,7 +122,9 @@ export default async function handler(req, res) {
         ${stima_indicativa || stima_indicativa_calcolata},
         ${immobile_nome},
         ${immobile_id},
-        ${note}
+        ${note},
+        ${'acconsentito'},
+        ${marketingConsentValue}
       ) RETURNING id, created_at;
     `;
 
@@ -105,7 +132,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       success: true,
-      message: 'Richiesta memorizzata con successo nel database Vercel Postgres',
+      message: 'Richiesta memorizzata con successo nel database Vercel Postgres (Conformità GDPR attestata)',
       leadId: newRecord.id,
       timestamp: newRecord.created_at
     });

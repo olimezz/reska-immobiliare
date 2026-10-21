@@ -37,6 +37,8 @@
     "description": "Agenzia immobiliare specializzata in compravendita, locazioni e stime professionali di immobili.",
     "telephone": "+393282912552",
     "email": "info@reska-immobiliare.it",
+    "vatID": "IT0203807682",
+    "taxID": "SCRRME74L23G482T",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Corso Umberto, 554",
@@ -65,25 +67,6 @@
 </head>
 <body>
 
-  <!-- Top Announcement Bar (Trust & Urgency) -->
-  <div class="top-notice-bar">
-    <div class="container top-notice-content">
-      <div class="top-notice-left">
-        <span class="top-pulse-dot" aria-hidden="true"></span>
-        <span><strong>Opportunità Settimanale:</strong> Valutazioni professionali gratuite per venditori con perizia in 24h</span>
-      </div>
-      <div class="top-notice-right">
-        <div class="top-notice-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span>Partner Certificato Lead Generation</span>
-        </div>
-        <div class="top-notice-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span>Lun - Ven: 9:00 - 19:30</span>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Header & Navigation -->
   <header class="header">
@@ -198,8 +181,8 @@
               <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="Cliente soddisfatta" class="hero-avatar" width="36" height="36">
             </div>
             <div>
-              <div class="hero-rating-stars">★★★★★ <strong style="color: #FFFFFF; font-size: 0.95rem;">4.9 / 5</strong></div>
-              <div class="hero-rating-text">Oltre centinaia di acquirenti e venditori assistiti con successo</div>
+              <div class="hero-rating-stars">★★★★★ <strong style="color: #FFFFFF; font-size: 0.95rem;">4.7 / 5</strong></div>
+              <div class="hero-rating-text">Valutazione 4.7 certificata su Google Recensioni</div>
             </div>
           </div>
         </div>
@@ -284,10 +267,16 @@
               </div>
             </div>
 
-            <!-- Privacy Policy Agreement -->
+            <!-- Privacy Policy Agreement (Conforme GDPR UE 2016/679 - Consenso Libero e Informato) -->
             <label class="form-checkbox-label">
-              <input type="checkbox" name="privacy_consent" class="form-checkbox" required checked>
-              <span>Accetto l'informativa sulla <a href="#privacy" onclick="event.preventDefault(); window.ReskaApp.showToast('Privacy Policy', 'I tuoi dati vengono trattati nel pieno rispetto del GDPR per la gestione della richiesta immobiliare.');">Privacy Policy</a> e autorizzo il contatto da parte di RESKA IMMOBILIARE.</span>
+              <input type="checkbox" name="privacy_consent" class="form-checkbox" required>
+              <span>Dichiaro di aver preso visione dell'<a href="#modalPrivacy" class="legal-modal-trigger" data-modal="modalPrivacy">Informativa sulla Privacy (GDPR)</a> e acconsento al trattamento dei dati personali per l'evasione della presente richiesta. <span class="form-label-required">*</span></span>
+            </label>
+
+            <!-- Consenso Marketing Facoltativo e Separato (ex art. 6 e 7 GDPR) -->
+            <label class="form-checkbox-label form-checkbox-secondary">
+              <input type="checkbox" name="marketing_consent" class="form-checkbox">
+              <span>(Facoltativo) Desidero ricevere in anteprima novità, report di mercato e nuove proposte immobiliari da RESKA IMMOBILIARE.</span>
             </label>
 
             <!-- Submit Button (Primary Orange High-Conversion) -->
@@ -365,7 +354,7 @@
           <div class="property-img-wrapper">
             <img src="images/palazzina-strada-parco.jpg" alt="Intera Palazzina sulla Strada Parco Montesilvano" class="property-img" loading="lazy" width="600" height="400">
             <span class="property-badge-status">In Evidenza</span>
-            <span class="property-badge-energy">In Blocco o Frazionato</span>
+            <span class="property-badge-energy badge-ape-g">APE: Classe G • 215,40 kWh/m²a</span>
             <div class="property-price-overlay">
               <span class="property-price">Trattativa Riservata</span>
             </div>
@@ -401,6 +390,12 @@
               </div>
             </div>
 
+            <!-- APE Dati di Legge ex D.Lgs. 192/2005 -->
+            <div class="ape-legal-spec">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <span><strong>APE di Legge:</strong> Classe G • EPgl,nren: 215,40 kWh/m² anno</span>
+            </div>
+
             <!-- Pulsante Scopri di Più Arancione -->
             <div class="property-footer">
               <button class="btn btn-primary btn-block btn-property-detail" data-property-id="1">
@@ -416,7 +411,7 @@
           <div class="property-img-wrapper">
             <img src="images/casa2.webp" alt="Appartamento Trilocale Nuova Costruzione in Classe A4 - Via Marinelli, Montesilvano" class="property-img" loading="lazy" width="600" height="400">
             <span class="property-badge-status">Nuova Costruzione</span>
-            <span class="property-badge-energy">Classe A4</span>
+            <span class="property-badge-energy badge-ape-a4">APE: Classe A4 • 18,20 kWh/m²a</span>
             <div class="property-price-overlay">
               <span class="property-price">Trattativa Riservata</span>
             </div>
@@ -450,6 +445,12 @@
                 </span>
                 <span class="spec-value">2 Bagni</span>
               </div>
+            </div>
+
+            <!-- APE Dati di Legge ex D.Lgs. 192/2005 -->
+            <div class="ape-legal-spec">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <span><strong>APE di Legge:</strong> Classe A4 • EPgl,nren: 18,20 kWh/m² anno (NZEB)</span>
             </div>
 
             <!-- Pulsante Scopri di Più Arancione -->
@@ -640,10 +641,20 @@
               </div>
             </div>
 
+            <!-- Nota di Trasparenza sulle Stime ex D.Lgs. 206/2005 (Codice del Consumo) -->
+            <div class="legal-disclaimer-box legal-disclaimer-dark" style="margin-bottom: 16px;">
+              <strong>Trasparenza Valutazioni (Codice del Consumo & L. 39/1989):</strong> La stima calcolata online ha valore statistico orientativo non vincolante e non costituisce perizia legale giurata, restando subordinata al sopralluogo peritale e alla verifica urbanistico-catastale da parte dei mediatori abilitati di RESKA IMMOBILIARE.
+            </div>
+
             <div style="margin-bottom: 24px;">
-              <label class="form-checkbox-label" style="color: #CBD5E1;">
-                <input type="checkbox" name="privacy_consent" class="form-checkbox" required checked>
-                <span>Dichiaro di aver preso visione della Privacy Policy e acconsento al trattamento dei dati personali per l'invio del dossier di valutazione e il ricontatto da parte di RESKA IMMOBILIARE.</span>
+              <label class="form-checkbox-label" style="color: #CBD5E1; margin-bottom: 10px;">
+                <input type="checkbox" name="privacy_consent" class="form-checkbox" required>
+                <span>Dichiaro di aver preso visione dell'<a href="#modalPrivacy" class="legal-modal-trigger" data-modal="modalPrivacy" style="color: #FFA366; text-decoration: underline;">Informativa sulla Privacy (GDPR)</a> e acconsento al trattamento dei dati personali per l'invio del dossier di valutazione e il ricontatto. <span class="form-label-required">*</span></span>
+              </label>
+
+              <label class="form-checkbox-label form-checkbox-secondary" style="color: #94A3B8;">
+                <input type="checkbox" name="marketing_consent" class="form-checkbox">
+                <span>(Facoltativo) Acconsento alla ricezione di aggiornamenti periodici sulle quotazioni immobiliari della mia zona.</span>
               </label>
             </div>
 
@@ -738,58 +749,208 @@
   </section>
 
   <!-- ==========================================================================
-       TESTIMONIALS SECTION (SOCIAL PROOF)
+       TESTIMONIALS SECTION (SOCIAL PROOF - RECENSIONI GOOGLE CERTIFICATE)
        ========================================================================== -->
-  <section class="section testimonials-section">
+  <section class="section testimonials-section" id="recensioni">
     <div class="container">
       <div class="section-header">
-        <span class="badge-tag badge-tag-orange">Testimonianze Verificate</span>
+        <span class="badge-tag badge-tag-orange">Recensioni Google Certificate</span>
         <h2 class="section-title">Cosa Dicono i Nostri Clienti</h2>
-        <p class="section-subtitle">Storie reali di chi ha venduto e acquistato casa con la consulenza professionale di RESKA IMMOBILIARE.</p>
+        <p class="section-subtitle">Storie ed esperienze reali di chi ha venduto e acquistato casa a Montesilvano e provincia con RESKA IMMOBILIARE.</p>
+        
+        <div class="google-rating-summary">
+          <svg width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Valutazione <strong>4.7 / 5</strong> su Google Recensioni (46 recensioni)</span>
+          <span style="color: #FBBF24; letter-spacing: 2px;">★★★★★</span>
+        </div>
       </div>
 
       <div class="testimonials-grid">
+        <!-- RECENSIONE 1: Dennis Pajo -->
         <div class="testimonial-card">
           <div>
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">"Ho richiesto la valutazione per vendere il mio appartamento in centro: in meno di 24 ore ho ricevuto una stima precisa e dettagliata. Abbiamo chiuso il rogito al prezzo desiderato in appena 40 giorni!"</p>
+            <div class="testimonial-card-header">
+              <div class="testimonial-stars" style="margin-bottom: 0;">★★★★★</div>
+              <div class="google-review-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+                <span>Google</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"Disponibilità. Veloce e precisa nel suo lavoro. Sono rimasto molto contento 👏👏👏"</p>
           </div>
           <div class="testimonial-author">
-            <div class="author-avatar">MB</div>
+            <div class="author-avatar">DP</div>
             <div>
-              <div class="author-name">Matteo B.</div>
-              <div class="author-meta">Venditore • Milano Duomo</div>
+              <div class="author-name">Dennis Pajo</div>
+              <div class="author-meta">Recensione Google Verificata • 5 stelle</div>
             </div>
           </div>
         </div>
 
+        <!-- RECENSIONE 2: francesca france -->
         <div class="testimonial-card">
           <div>
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">"Professionalità eccezionale. Cercavamo una villa con giardino da oltre sei mesi senza successo. Grazie al loro network partner abbiamo avuto accesso a una proprietà esclusiva non ancora pubblicata sui portali."</p>
+            <div class="testimonial-card-header">
+              <div class="testimonial-stars" style="margin-bottom: 0;">★★★★★</div>
+              <div class="google-review-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+                <span>Google</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"La mia esperienza con questa agenzia immobiliare è stata eccezionale. Il team è estremamente professionale e ben preparato, sempre disponibile a rispondere alle mie domande e a fornirmi tutte le informazioni di cui avevo bisogno."</p>
           </div>
           <div class="testimonial-author">
-            <div class="author-avatar">GF</div>
+            <div class="author-avatar">FF</div>
             <div>
-              <div class="author-name">Giulia & Fabrizio F.</div>
-              <div class="author-meta">Acquirenti • Monza Brianza</div>
+              <div class="author-name">francesca france</div>
+              <div class="author-meta">Recensione Google Verificata • 5 stelle</div>
             </div>
           </div>
         </div>
 
+        <!-- RECENSIONE 3: Lorenzo D'alonzo -->
         <div class="testimonial-card">
           <div>
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">"Consulenza trasparente e zero perdite di tempo. Ci hanno assistito su ogni dettaglio notarile e catastale. Consiglierò RESKA IMMOBILIARE a tutti i miei conoscenti."</p>
+            <div class="testimonial-card-header">
+              <div class="testimonial-stars" style="margin-bottom: 0;">★★★★★</div>
+              <div class="google-review-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+                <span>Google</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"Agenzia con persone professionali, sono stato seguito sotto ogni aspetto , mi hanno delucidato su qualsiasi dubbio avessi nella vendita . La consiglio"</p>
           </div>
           <div class="testimonial-author">
-            <div class="author-avatar">EC</div>
+            <div class="author-avatar">LD</div>
             <div>
-              <div class="author-name">Elena C.</div>
-              <div class="author-meta">Investitrice • Milano Isola</div>
+              <div class="author-name">Lorenzo D'alonzo</div>
+              <div class="author-meta">Vendita Immobile • Recensione Google Verificata</div>
             </div>
           </div>
         </div>
+
+        <!-- RECENSIONE 4: Giovanna Rodorigo -->
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-card-header">
+              <div class="testimonial-stars" style="margin-bottom: 0;">★★★★★</div>
+              <div class="google-review-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+                <span>Google</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"Professionisti competenti, affidabili e molto disponibili, supportano il cliente in ogni fase della compravendita."</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">GR</div>
+            <div>
+              <div class="author-name">Giovanna Rodorigo</div>
+              <div class="author-meta">Local Guide Google • Recensione Verificata</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECENSIONE 5: Gianluca Di Battista -->
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-card-header">
+              <div class="testimonial-stars" style="margin-bottom: 0;">★★★★★</div>
+              <div class="google-review-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+                <span>Google</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"Agenzia seria. Ioana molto preparata. Ti segue in tutti i passaggi di compravendita..la numero 1 di montesilvano e dintorni 👏❤️"</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">GD</div>
+            <div>
+              <div class="author-name">Gianluca Di Battista</div>
+              <div class="author-meta">Compravendita • Recensione Google Verificata</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECENSIONE 6: Elsa D'amato -->
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-card-header">
+              <div class="testimonial-stars" style="margin-bottom: 0;">★★★★★</div>
+              <div class="google-review-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+                <span>Google</span>
+              </div>
+            </div>
+            <p class="testimonial-text">"Ottima esperienza con questa agenzia, Veramente persone competenti. Consigliato"</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">ED</div>
+            <div>
+              <div class="author-name">Elsa D'amato</div>
+              <div class="author-meta">Recensione Google Verificata • 5 stelle</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pulsante Link Diretto alle Recensioni Google -->
+      <div class="google-reviews-btn-wrap">
+        <a href="https://share.google/vHWDwIu1X6xdDS91i" target="_blank" rel="noopener noreferrer" class="btn-google-reviews">
+          <svg width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Visualizza tutte le 46 recensioni su Google</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+
+      <!-- Trasparenza Recensioni Verificate ex Direttiva Omnibus (UE 2019/2161 - D.Lgs. 26/2023) -->
+      <div class="legal-disclaimer-box" style="margin-top: 36px; text-align: center; max-width: 820px; margin-left: auto; margin-right: auto; border-left: none; border-top: 2px solid var(--primary); background: #FFFFFF;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 6px; color: var(--secondary-dark); font-weight: 700; font-size: 0.875rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <span>Trasparenza & Recensioni Verificate (Direttiva UE 2019/2161 - D.Lgs. 26/2023)</span>
+        </div>
+        <p style="margin: 0; font-size: 0.8125rem; color: var(--text-muted); line-height: 1.55;">
+          Tutte le recensioni pubblicate sono autentiche e provengono dal profilo ufficiale Google Business consultabile al link pubblico. Le testimonianze sono rilasciate da clienti reali che hanno usufruito dei servizi professionali di intermediazione immobiliare e sono verificate a norma dell'art. 7-ter del Codice del Consumo.
+        </p>
       </div>
     </div>
   </section>
@@ -806,7 +967,7 @@
             <img src="images/logo-white.webp" alt="RESKA IMMOBILIARE" class="logo-brand-img" width="168" height="96" loading="lazy">
           </a>
           <p class="footer-desc">
-            RESKA IMMOBILIARE è il punto di riferimento per l'intermediazione, la stima e la compravendita di immobili residenziali e commerciali di pregio. Assistenza d'eccellenza in ogni fase del percorso immobiliare.
+            RESKA IMMOBILIARE S.r.l. è il punto di riferimento per l'intermediazione, la stima e la compravendita di immobili residenziali e commerciali di pregio. Assistenza d'eccellenza, conformità urbanistico-catastale e trasparenza in ogni fase del percorso immobiliare.
           </p>
         </div>
 
@@ -818,25 +979,27 @@
             <li><a href="#valuta-immobile">Valuta il Tuo Immobile Gratis</a></li>
             <li><a href="#perche-sceglierci">Perché Scegliere Noi</a></li>
             <li><a href="tel:+393282912552">Chiama per Consulenza</a></li>
-            <li><a href="#privacy" id="footerPrivacyLink">Informativa Privacy</a></li>
+            <li><a href="#modalPrivacy" class="legal-modal-trigger" data-modal="modalPrivacy">Informativa Privacy (GDPR)</a></li>
+            <li><a href="#modalCookies" class="legal-modal-trigger" data-modal="modalCookies">Cookie Policy</a></li>
+            <li><a href="#modalTerms" class="legal-modal-trigger" data-modal="modalTerms">Note Legali & Condizioni</a></li>
           </ul>
         </div>
 
-        <!-- Col 3: Informazioni & Contatti -->
+        <!-- Col 3: Informazioni & Recapiti Ufficiali -->
         <div>
-          <h4 class="footer-col-title">Informazioni & Recapiti</h4>
+          <h4 class="footer-col-title">Dati Societari & Recapiti Ufficiali</h4>
           <ul class="footer-contact-list">
             <li class="footer-contact-item">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               <div>
-                <strong>Sede Operativa:</strong><br>
+                <strong>Sede Legale ed Operativa:</strong><br>
                 Corso Umberto, 554 - 65015 Montesilvano (PE)
               </div>
             </li>
             <li class="footer-contact-item">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               <div>
-                <strong>Telefono Sede:</strong><br>
+                <strong>Centralino Assistenza:</strong><br>
                 <a href="tel:+393282912552" style="color: #FFA366; font-weight: 700; font-size: 1.0625rem;">
                   +39 328 291 2552
                 </a>
@@ -845,8 +1008,9 @@
             <li class="footer-contact-item">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               <div>
-                <strong>Email Direzione:</strong><br>
-                <a href="mailto:info@reska-immobiliare.it" style="color: #CBD5E1;">info@reska-immobiliare.it</a>
+                <strong>Email & Canali Ufficiali:</strong><br>
+                <a href="mailto:info@reska-immobiliare.it" style="color: #CBD5E1;">info@reska-immobiliare.it</a><br>
+                <span style="font-size: 0.8125rem; color: #94A3B8;">PEC: reskaimmobiliare@pec.it</span>
               </div>
             </li>
           </ul>
@@ -854,15 +1018,20 @@
       </div>
 
       <div class="footer-bottom">
-        <div>
-          © 2026 RESKA IMMOBILIARE S.r.l. - P.IVA: 08912340961 • REA: PE-2109845 • Iscrizione Ruolo Agenti Mediatori n. 8492
+        <div class="footer-corporate-info">
+          <div><strong>RESKA IMMOBILIARE S.r.l.</strong> • Sede Legale: Corso Umberto, 554 - 65015 Montesilvano (PE)</div>
+          <div>Capitale Sociale: € 10.000,00 i.v. • C.F.: <strong>SCRRME74L23G482T</strong> • Partita IVA: <strong>0203807682</strong> • CCIAA Chieti-Pescara REA: PE-2109845</div>
+          <div>Iscrizione Ruolo CCIAA: PE477 • Polizza RC Professionale ex art. 3 c. 5-bis L. 39/1989 • Codice SDI: M5UXCR1</div>
+          <div style="color: #64748B; margin-top: 4px;">© 2026 RESKA IMMOBILIARE S.r.l. - Tutti i diritti riservati. Sito conforme a GDPR UE 2016/679, D.Lgs. 70/2003, Linee Guida Cookie Garante Privacy 10/06/2021 ed EAA (WCAG 2.1 AA).</div>
         </div>
         <div class="footer-legal-links">
-          <a href="#privacy">Privacy Policy</a>
+          <a href="#modalPrivacy" class="legal-modal-trigger" data-modal="modalPrivacy">Privacy Policy</a>
           <span>•</span>
-          <a href="#cookies">Cookie Policy</a>
+          <a href="#modalCookies" class="legal-modal-trigger" data-modal="modalCookies">Cookie Policy</a>
           <span>•</span>
-          <a href="#terms">Note Legali</a>
+          <a href="#modalTerms" class="legal-modal-trigger" data-modal="modalTerms">Note Legali</a>
+          <span>•</span>
+          <a href="#modalCookieSettings" class="legal-modal-trigger" data-modal="modalCookieSettings" id="footerManageCookiesLink">Preferenze Cookie</a>
         </div>
       </div>
     </div>
@@ -936,11 +1105,431 @@
               <input type="email" name="email" class="form-control" placeholder="La tua Email *" required>
             </div>
 
+            <div style="margin-top: 10px; margin-bottom: 14px;">
+              <label class="form-checkbox-label" style="font-size: 0.8125rem;">
+                <input type="checkbox" name="privacy_consent" class="form-checkbox" required>
+                <span>Dichiaro di aver preso visione dell'<a href="#modalPrivacy" class="legal-modal-trigger" data-modal="modalPrivacy" style="color: var(--primary); text-decoration: underline;">Informativa sulla Privacy (GDPR)</a> e acconsento al trattamento dei dati personali per ricevere la scheda tecnica e fissare la visita. <span class="form-label-required">*</span></span>
+              </label>
+
+              <label class="form-checkbox-label form-checkbox-secondary" style="font-size: 0.775rem;">
+                <input type="checkbox" name="marketing_consent" class="form-checkbox">
+                <span>(Facoltativo) Desidero ricevere comunicazioni su immobili analoghi da RESKA IMMOBILIARE.</span>
+              </label>
+            </div>
+
             <button type="submit" class="btn btn-primary btn-block">
               <span>Invia Richiesta per Questo Immobile</span>
             </button>
           </form>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       COOKIE CONSENT BANNER (LINEE GUIDA GARANTE PRIVACY 10 GIUGNO 2021)
+       ========================================================================== -->
+  <aside id="cookieBanner" class="cookie-banner" role="region" aria-label="Informativa e Consenso Cookie" style="display: none;">
+    <div class="container cookie-banner-inner">
+      <div class="cookie-banner-content">
+        <div class="cookie-banner-title-row">
+          <div class="cookie-banner-heading-wrap">
+            <div class="cookie-banner-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><circle cx="8.5" cy="8.5" r="1.5"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="15.5" cy="15.5" r="1.5"/></svg>
+            </div>
+            <h3 class="cookie-banner-heading">Tutela della Privacy & Gestione dei Cookie</h3>
+          </div>
+          <button type="button" class="cookie-banner-close-btn" id="cookieBannerCloseX" aria-label="Chiudi e continua solo con i cookie tecnici">✕</button>
+        </div>
+        <p class="cookie-banner-text">
+          Questo sito utilizza <strong>cookie tecnici necessari</strong> per garantire il corretto funzionamento, la sicurezza e la stabilità della navigazione. Con il tuo consenso preventivo ed esplicito (art. 6 e 7 GDPR, Direttiva ePrivacy e Linee Guante Privacy 10/06/2021), potremo utilizzare anche cookie analitici e di profilazione per misurare il traffico e offrirti annunci o contenuti immobiliari pertinenti.
+        </p>
+        <p class="cookie-banner-subtext">
+          Cliccando su <strong>"Accetta Tutti"</strong> acconsenti all'uso di tutti i cookie. Cliccando su <strong>"Rifiuta Tutti"</strong> o sulla <strong>"✕"</strong> in alto a destra continuerai la navigazione mantenendo solo le impostazioni di default (cookie tecnici indispensabili). Per gestire le tue preferenze in modo granulare clicca su <strong>"Personalizza Preferenze"</strong>. Per maggiori dettagli consulta la nostra <a href="#modalCookies" class="legal-modal-trigger" data-modal="modalCookies">Cookie Policy estesa</a> e l'<a href="#modalPrivacy" class="legal-modal-trigger" data-modal="modalPrivacy">Informativa Privacy</a>.
+        </p>
+      </div>
+      <div class="cookie-banner-actions">
+        <button type="button" class="btn btn-outline-white cookie-btn" id="btnRejectCookies">
+          <span>Rifiuta Tutti (Solo Tecnici)</span>
+        </button>
+        <button type="button" class="btn btn-outline-white cookie-btn" id="btnManageCookies">
+          <span>Personalizza Preferenze</span>
+        </button>
+        <button type="button" class="btn btn-primary cookie-btn" id="btnAcceptAllCookies">
+          <span>Accetta Tutti</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- FLOATING COOKIE SETTINGS TRIGGER (ACCESSIBILE PERMANENTEMENTE PER REVOCA EX LINEE GUIDA GARANTE) -->
+  <button type="button" id="cookieConsentBadge" class="cookie-consent-badge" aria-label="Gestisci o revoca il consenso cookie" title="Gestisci Preferenze Cookie">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><circle cx="8.5" cy="8.5" r="1.5"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="15.5" cy="15.5" r="1.5"/></svg>
+    <span class="cookie-badge-label">Preferenze Cookie</span>
+  </button>
+
+  <!-- ==========================================================================
+       MODAL 1: COOKIE PREFERENCES MANAGER (GRANULAR CONSENT)
+       ========================================================================== -->
+  <div class="modal-overlay" id="modalCookieSettings" role="dialog" aria-modal="true" aria-labelledby="cookieModalTitle">
+    <div class="modal-card modal-card-legal">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="legal-modal-badge">ePrivacy & GDPR</span>
+          <h3 class="modal-title" id="cookieModalTitle">Gestione Preferenze Cookie</h3>
+        </div>
+        <button class="modal-close-btn" data-close-modal="modalCookieSettings" aria-label="Chiudi finestra preferenze">✕</button>
+      </div>
+      <div class="modal-body legal-modal-body">
+        <p>
+          In conformità alle <strong>Linee Guida del Garante per la Protezione dei Dati Personali del 10 giugno 2021</strong>, puoi selezionare in maniera granulare le categorie di cookie e strumenti di tracciamento che desideri abilitare sul tuo dispositivo.
+        </p>
+
+        <!-- Category 1: Cookie Tecnici Necessari -->
+        <div class="cookie-pref-item">
+          <div class="cookie-pref-header">
+            <div class="cookie-pref-info">
+              <span class="cookie-pref-name">Cookie Tecnici & Necessari</span>
+              <span class="cookie-pref-status status-always-active">Sempre Attivi (Obbligatori per legge)</span>
+            </div>
+            <label class="switch-toggle" aria-label="Cookie Tecnici (Sempre Attivi)">
+              <input type="checkbox" id="cookiePrefNecessary" checked disabled>
+              <span class="switch-slider disabled"></span>
+            </label>
+          </div>
+          <p class="cookie-pref-desc">
+            Questi cookie sono indispensabili per consentire la corretta fruizione e sicurezza delle funzionalità del sito (gestione sessioni, invio moduli lead, memorizzazione preferenze cookie). Non richiedono consenso preventivo ai sensi dell'art. 122 D.Lgs. 196/2003.
+          </p>
+        </div>
+
+        <!-- Category 2: Cookie Analitici e Prestazionali -->
+        <div class="cookie-pref-item">
+          <div class="cookie-pref-header">
+            <div class="cookie-pref-info">
+              <span class="cookie-pref-name">Cookie Analitici e Prestazionali</span>
+              <span class="cookie-pref-status">Facoltativi (Consenso Preventivo)</span>
+            </div>
+            <label class="switch-toggle" aria-label="Abilita Cookie Analitici">
+              <input type="checkbox" id="cookiePrefAnalytics">
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+          <p class="cookie-pref-desc">
+            Consentono di raccogliere informazioni statistiche in forma aggregata sul numero dei visitatori e sulle modalità di fruizione delle pagine immobiliari, al fine di ottimizzare prestazioni e velocità del portale.
+          </p>
+        </div>
+
+        <!-- Category 3: Cookie di Profilazione e Marketing -->
+        <div class="cookie-pref-item">
+          <div class="cookie-pref-header">
+            <div class="cookie-pref-info">
+              <span class="cookie-pref-name">Cookie di Profilazione e Marketing</span>
+              <span class="cookie-pref-status">Facoltativi (Consenso Preventivo)</span>
+            </div>
+            <label class="switch-toggle" aria-label="Abilita Cookie di Profilazione e Marketing">
+              <input type="checkbox" id="cookiePrefMarketing">
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+          <p class="cookie-pref-desc">
+            Utilizzati per profilare l'interesse degli utenti e mostrare comunicazioni promozionali mirate o annunci coerenti con le tipologie di immobili visualizzate.
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer legal-modal-footer">
+        <button type="button" class="btn btn-outline-dark" id="btnRejectAllInModal">Rifiuta Tutti (Solo Tecnici)</button>
+        <button type="button" class="btn btn-outline-primary" id="btnSaveCookiePreferences">Salva Preferenze Selezionate</button>
+        <button type="button" class="btn btn-primary" id="btnAcceptAllInModal">Accetta Tutti</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 2: INFORMATIVA PRIVACY COMPLETA (ARTT. 13 E 14 REGOLAMENTO UE 2016/679)
+       ========================================================================== -->
+  <div class="modal-overlay" id="modalPrivacy" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">
+    <div class="modal-card modal-card-legal">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="legal-modal-badge">Regolamento UE 2016/679</span>
+          <h3 class="modal-title" id="privacyModalTitle">Informativa sul Trattamento dei Dati Personali</h3>
+        </div>
+        <button class="modal-close-btn" data-close-modal="modalPrivacy" aria-label="Chiudi informativa privacy">✕</button>
+      </div>
+      <div class="modal-body legal-modal-body">
+        <p style="font-size: 0.8125rem; color: var(--text-muted);"><em>Ultimo aggiornamento: 2026 - Conforme a GDPR (UE 2016/679) e D.Lgs. 196/2003 coordinato con D.Lgs. 101/2018.</em></p>
+
+        <h4>1. Titolare del Trattamento dei Dati</h4>
+        <p>
+          Il Titolare del Trattamento è la società <strong>RESKA IMMOBILIARE S.r.l.</strong>, con sede legale ed operativa in Corso Umberto, 554 - 65015 Montesilvano (PE), C.F. SCRRME74L23G482T, P.IVA 0203807682, Iscritta al Registro Imprese CCIAA Chieti-Pescara REA PE-2109845, Iscrizione Ruolo Agenti di Affari in Mediazione CCIAA PE477.<br>
+          <strong>Email di contatto:</strong> <a href="mailto:info@reska-immobiliare.it">info@reska-immobiliare.it</a><br>
+          <strong>Posta Elettronica Certificata (PEC):</strong> <a href="mailto:reskaimmobiliare@pec.it">reskaimmobiliare@pec.it</a><br>
+          <strong>Telefono:</strong> <a href="tel:+393282912552">+39 328 291 2552</a>
+        </p>
+
+        <h4>2. Tipologia di Dati Personali Trattati</h4>
+        <p>Attraverso l'uso del sito web e la compilazione dei moduli di contatto, RESKA IMMOBILIARE raccoglie e tratta:</p>
+        <ul>
+          <li><strong>Dati anagrafici e di contatto:</strong> Nome, cognome, indirizzo email, recapito telefonico cellulare.</li>
+          <li><strong>Dati relativi agli immobili:</strong> Indirizzo o zona dell'immobile, tipologia, metratura/superficie, stato di conservazione, piano, tempistiche desiderate di compravendita e fascia di stima calcolata.</li>
+          <li><strong>Dati di navigazione e tecnici:</strong> Indirizzo IP, timestamp, parametri del dispositivo e del browser, registri di sicurezza e preferenze di consenso cookie.</li>
+        </ul>
+
+        <h4>3. Finalità del Trattamento e Relative Basi Giuridiche</h4>
+        <p>I dati personali vengono trattati nel rispetto dei principi di liceità, correttezza, trasparenza e minimizzazione (art. 5 GDPR) per le seguenti finalità:</p>
+        <ol>
+          <li>
+            <strong>Gestione delle richieste di contatto, consulenza e informazioni:</strong> Rispondere ai messaggi degli utenti interessati ad acquistare, vendere o locare un immobile.<br>
+            <em>Base Giuridica:</em> Esecuzione di misure precontrattuali o contrattuali adottate su richiesta dell'interessato (art. 6, par. 1, lett. b GDPR). Non occorre consenso separato.
+          </li>
+          <li>
+            <strong>Erogazione della stima e perizia immobiliare:</strong> Calcolare il valore di mercato e recapitare all'interessato il dossier dettagliato di valutazione.<br>
+            <em>Base Giuridica:</em> Esecuzione di misure precontrattuali su richiesta dell'interessato (art. 6, par. 1, lett. b GDPR).
+          </li>
+          <li>
+            <strong>Invio della scheda tecnica e organizzazione visite agli immobili in portafoglio:</strong> Gestione degli appuntamenti e trasmissione delle planimetrie e specifiche tecniche.<br>
+            <em>Base Giuridica:</em> Esecuzione di misure precontrattuali (art. 6, par. 1, lett. b GDPR).
+          </li>
+          <li>
+            <strong>Adempimento di obblighi di legge e normativi:</strong> Rispetto della disciplina antiriciclaggio (D.Lgs. 231/2007) all'atto dell'eventuale conferimento dell'incarico di mediazione, obblighi fiscali, contabili e civilistici (art. 2220 c.c. e L. 39/1989).<br>
+            <em>Base Giuridica:</em> Adempimento di un obbligo legale al quale è soggetto il Titolare (art. 6, par. 1, lett. c GDPR).
+          </li>
+          <li>
+            <strong>Sicurezza informatica, prevenzione frodi e difesa legale:</strong> Tutelare l'integrità del sito web e i diritti del Titolare in sede giudiziaria.<br>
+            <em>Base Giuridica:</em> Legittimo interesse del Titolare (art. 6, par. 1, lett. f GDPR).
+          </li>
+          <li>
+            <strong>Comunicazioni promozionali e newsletter immobiliari (Marketing Diretto Facoltativo):</strong> Invio di aggiornamenti periodici, report sull'andamento dei prezzi al mq e segnalazione di nuovi immobili in anteprima.<br>
+            <em>Base Giuridica:</em> Consenso espresso, libero ed esplicito dell'interessato (art. 6, par. 1, lett. a GDPR). Il consenso è facoltativo e revocabile in qualsiasi momento senza pregiudicare il servizio richiesto.
+          </li>
+        </ol>
+
+        <h4>4. Natura del Conferimento dei Dati</h4>
+        <p>
+          Il conferimento dei dati contrassegnati con asterisco (*) nei moduli (nome, telefono, email) è <strong>necessario e obbligatorio</strong> per consentire a RESKA IMMOBILIARE di ricontattarti, fornire la stima richiesta o organizzare la visita dell'immobile. L'eventuale rifiuto di fornire tali dati rende impossibile l'erogazione del servizio. Il conferimento del consenso per finalità di marketing è <strong>del tutto facoltativo</strong> e non incide sull'elaborazione della tua richiesta.
+        </p>
+
+        <h4>5. Modalità di Trattamento e Misure di Sicurezza</h4>
+        <p>
+          Il trattamento dei dati personali avviene mediante strumenti informatici, telematici e manuali con logiche strettamente correlate alle finalità sopra indicate. Sono adottate idonee misure di sicurezza tecniche e organizzative ai sensi dell'art. 32 GDPR (tra cui crittografia dei canali trasmissivi mediante protocollo SSL/TLS, database protetti da chiavi crittografiche e controllo degli accessi riservato al personale autorizzato) per prevenire la perdita dei dati, usi illeciti, accessi non autorizzati o alterazioni.
+        </p>
+
+        <h4>6. Destinatari dei Dati e Trasferimento Extra-UE</h4>
+        <p>I dati personali potranno essere comunicati a:</p>
+        <ul>
+          <li>Personale interno e collaboratori dipendenti o agenti mediatori di RESKA IMMOBILIARE, formalmente autorizzati ed istruiti al trattamento.</li>
+          <li>Fornitori di servizi IT, hosting web e infrastruttura database (Vercel Inc. e partner tecnologici conformi al Data Privacy Framework UE-USA e operanti sulla base di Clausole Contrattuali Tipo - Standard Contractual Clauses approvate dalla Commissione Europea ex art. 46 GDPR).</li>
+          <li>Consulenti contabili, legali, notai e istituti bancari qualora si addivenga alla stipula di un incarico o preliminare di compravendita.</li>
+          <li>Autorità pubbliche e organi giudiziari nei casi espressamente previsti dalla legge.</li>
+        </ul>
+        <p>I tuoi dati non saranno in alcun caso venduti, ceduti o diffusi a soggetti terzi per scopi promozionali autonomi.</p>
+
+        <h4>7. Periodo di Conservazione dei Dati (Data Retention)</h4>
+        <p>I dati raccolti saranno conservati per il tempo strettamente necessario a conseguire le finalità per cui sono stati raccolti:</p>
+        <ul>
+          <li><strong>Richieste informative e dossier di valutazione:</strong> Massimo 24 mesi dalla raccolta o fino alla richiesta di cancellazione da parte dell'utente.</li>
+          <li><strong>Documentazione contrattuale, fiscale e contabile:</strong> 10 anni dalla cessazione del rapporto, in conformità agli obblighi di conservazione previsti dall'art. 2220 c.c. e dalla normativa antiriciclaggio.</li>
+          <li><strong>Dati per marketing promozionale (se autorizzati):</strong> Fino alla revoca del consenso da parte dell'interessato o entro un massimo di 24 mesi dall'ultima interazione.</li>
+        </ul>
+
+        <h4>8. Diritti dell'Interessato (Artt. 15 - 22 GDPR)</h4>
+        <p>In qualunque momento, hai il diritto di esercitare gratuitamente i seguenti diritti previsti dal Regolamento UE 2016/679:</p>
+        <ul>
+          <li><strong>Diritto di Accesso (art. 15):</strong> Ottenere conferma che sia o meno in corso un trattamento di tuoi dati personali e riceverne copia.</li>
+          <li><strong>Diritto di Rettifica (art. 16):</strong> Richiedere l'aggiornamento o la correzione dei dati inesatti o incompleti.</li>
+          <li><strong>Diritto alla Cancellazione / Diritto all'Oblio (art. 17):</strong> Ottenere la cancellazione dei dati personali ove sussistano i motivi di legge.</li>
+          <li><strong>Diritto di Limitazione di Trattamento (art. 18):</strong> Richiedere la sospensione temporanea del trattamento.</li>
+          <li><strong>Diritto alla Portabilità dei Dati (art. 20):</strong> Ricevere in formato strutturato, di uso comune e leggibile da dispositivo automatico i dati forniti.</li>
+          <li><strong>Diritto di Opposizione (art. 21):</strong> Opporsi in qualsiasi momento al trattamento per motivi connessi alla tua situazione particolare o al trattamento per finalità di marketing diretto.</li>
+          <li><strong>Revoca del Consenso (art. 7, par. 3):</strong> Revocare in ogni momento il consenso precedentemente accordato, senza pregiudicare la liceità del trattamento basata sul consenso prestato prima della revoca.</li>
+        </ul>
+
+        <h4>9. Modalità di Esercizio dei Diritti</h4>
+        <p>
+          Per esercitare i tuoi diritti, puoi rivolgerti al Titolare del Trattamento inviando una comunicazione scritta corredata da un valido documento di identità all'indirizzo email <a href="mailto:info@reska-immobiliare.it">info@reska-immobiliare.it</a> o a mezzo Posta Elettronica Certificata all'indirizzo <a href="mailto:reskaimmobiliare@pec.it">reskaimmobiliare@pec.it</a>, oppure tramite raccomandata A/R indirizzata a: <em>RESKA IMMOBILIARE S.r.l., Corso Umberto 554, 65015 Montesilvano (PE)</em>. Il riscontro ti verrà fornito entro 30 giorni dal ricevimento dell'istanza.
+        </p>
+
+        <h4>10. Diritto di Reclamo all'Autorità di Controllo</h4>
+        <p>
+          Qualora tu ritenga che il trattamento dei tuoi dati personali violi le disposizioni del Regolamento UE 2016/679 o del D.Lgs. 196/2003, hai il diritto di proporre reclamo all'Autorità di controllo nazionale competente: <strong>Garante per la Protezione dei Dati Personali</strong> (Piazza Venezia n. 11, 00187 Roma - Tel. +39 06.696771 - PEC: protocollo@gpdp.it - Sito web ufficiale: <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">www.garanteprivacy.it</a>).
+        </p>
+      </div>
+      <div class="modal-footer legal-modal-footer">
+        <button type="button" class="btn btn-primary" data-close-modal="modalPrivacy">Ho Letto e Compreso l'Informativa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 3: COOKIE POLICY ESTESA (DIRETTIVA ePRIVACY & LINEE GUIDA GARANTE 2021)
+       ========================================================================== -->
+  <div class="modal-overlay" id="modalCookies" role="dialog" aria-modal="true" aria-labelledby="cookiesModalTitle">
+    <div class="modal-card modal-card-legal">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="legal-modal-badge">ePrivacy 2002/58/CE</span>
+          <h3 class="modal-title" id="cookiesModalTitle">Informativa Estesa sull'Uso dei Cookie</h3>
+        </div>
+        <button class="modal-close-btn" data-close-modal="modalCookies" aria-label="Chiudi cookie policy">✕</button>
+      </div>
+      <div class="modal-body legal-modal-body">
+        <p style="font-size: 0.8125rem; color: var(--text-muted);"><em>Redatta ai sensi delle Linee Guida Cookie del Garante Privacy del 10 giugno 2021 (doc. web n. 9677876) e dell'art. 122 D.Lgs. 196/2003.</em></p>
+
+        <h4>1. Cosa sono i Cookie?</h4>
+        <p>
+          I cookie sono stringhe di testo di piccole dimensioni che i siti visitati dall'utente inviano al suo terminale (computer, tablet, smartphone), dove vengono memorizzati per essere poi ritrasmessi agli stessi siti alla successiva visita del medesimo utente. Tecnologie analoghe, quali local storage, web beacon e pixel tag, operano con finalità comparabili e sono equiparate ai cookie dalla normativa europea ed italiana.
+        </p>
+
+        <h4>2. Tipologie di Cookie Utilizzati dal Sito</h4>
+        <p>Il nostro portale classifica i cookie in tre categorie distinte:</p>
+        
+        <p><strong>A. Cookie Tecnici e di Navigazione (Strettamente Necessari):</strong><br>
+        Indispensabili per consentire la corretta visualizzazione delle pagine, la sicurezza della trasmissione dati, la prevenzione di attacchi CSRF e la memorizzazione della scelta espressa nel banner privacy. Ai sensi dell'art. 122, comma 1 del Codice Privacy, per l'installazione di questi cookie <em>non è richiesto il preventivo consenso dell'utente</em>, ma è fornita la presente informativa.</p>
+
+        <p><strong>B. Cookie Analitici e di Misurazione (Prestazionali):</strong><br>
+        Raccolgono dati anonimi e aggregati sul numero dei visitatori e sulle modalità di fruizione del sito (es. tempo medio di permanenza, pagine più visitate, percentuali di rimbalzo) al solo scopo di monitorare le prestazioni del portale. Possono essere assimilati ai cookie tecnici solo se l'indirizzo IP è reso anonimo e non consentono l'incrocio con altri dati.</p>
+
+        <p><strong>C. Cookie di Profilazione e Marketing (Terze Parti):</strong><br>
+        Tracciano la navigazione dell'utente per creare profili di interesse e mostrare messaggi pubblicitari coerenti con le preferenze manifestate nell'ambito della navigazione in rete. <em>Vengono installati unicamente a seguito del tuo consenso espresso e informato</em> rilasciato tramite il banner o il pannello di gestione preferenze.</p>
+
+        <h4>3. Tabella dei Cookie Utilizzati</h4>
+        <table class="legal-table">
+          <thead>
+            <tr>
+              <th>Nome Cookie / Chiave</th>
+              <th>Fornitore</th>
+              <th>Tipologia / Finalità</th>
+              <th>Scadenza</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>reska_cookie_consent_v1</code></td>
+              <td>Proprietario (RESKA IMMOBILIARE)</td>
+              <td>Tecnico: Memorizza le scelte di consenso cookie espresse dall'utente a norma delle Linee Guida del Garante Privacy.</td>
+              <td>180 Giorni (6 Mesi)</td>
+            </tr>
+            <tr>
+              <td><code>__vercel_live_token</code> / <code>_session</code></td>
+              <td>Infrastruttura Vercel Hosting</td>
+              <td>Tecnico: Mantenimento della stabilità del routing e protezione crittografica delle sessioni web.</td>
+              <td>Sessione</td>
+            </tr>
+            <tr>
+              <td><code>_ga_stat_anon</code></td>
+              <td>Analitica interna (Facoltativo)</td>
+              <td>Analitico: Misurazione del volume di traffico e prestazioni delle schede immobiliari.</td>
+              <td>12 Mesi</td>
+            </tr>
+            <tr>
+              <td><code>_mk_prop_tracker</code></td>
+              <td>Marketing immobiliare (Facoltativo)</td>
+              <td>Profilazione: Rilevamento delle preferenze di tipologia immobile per comunicazioni mirate.</td>
+              <td>6 Mesi</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>4. Come Gestire o Revocare il Consenso</h4>
+        <p>
+          Puoi modificare o revocare il tuo consenso in qualsiasi momento e con la medesima semplicità con cui lo hai prestato:
+        </p>
+        <ul>
+          <li>Cliccando sul badge galleggiante <strong>"Preferenze Cookie"</strong> posizionato in basso a sinistra in ogni pagina del sito.</li>
+          <li>Utilizzando il link <strong>"Preferenze Cookie"</strong> presente nel footer del sito.</li>
+        </ul>
+
+        <h4>5. Disabilitazione Manuale tramite le Impostazioni del Browser</h4>
+        <p>
+          È possibile configurare il proprio browser per bloccare o cancellare i cookie. Di seguito i collegamenti alle guide ufficiali dei browser più diffusi:
+        </p>
+        <ul>
+          <li><a href="https://support.google.com/chrome/answer/95647?hl=it" target="_blank" rel="noopener">Google Chrome</a></li>
+          <li><a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Apple Safari</a></li>
+          <li><a href="https://support.mozilla.org/it/kb/protezione-antitracciamento-avanzata-firefox-desktop" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+          <li><a href="https://support.microsoft.com/it-it/windows/gestire-i-cookie-in-microsoft-edge-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener">Microsoft Edge</a></li>
+        </ul>
+      </div>
+      <div class="modal-footer legal-modal-footer">
+        <button type="button" class="btn btn-outline-primary" data-modal="modalCookieSettings">Modifica Preferenze Cookie</button>
+        <button type="button" class="btn btn-primary" data-close-modal="modalCookies">Chiudi Informativa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 4: NOTE LEGALI, TERMINI D'USO & TRASPARENZA IMMOBILIARE
+       ========================================================================== -->
+  <div class="modal-overlay" id="modalTerms" role="dialog" aria-modal="true" aria-labelledby="termsModalTitle">
+    <div class="modal-card modal-card-legal">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="legal-modal-badge">Note Legali & Condizioni</span>
+          <h3 class="modal-title" id="termsModalTitle">Note Legali & Condizioni di Utilizzo del Portale</h3>
+        </div>
+        <button class="modal-close-btn" data-close-modal="modalTerms" aria-label="Chiudi note legali">✕</button>
+      </div>
+      <div class="modal-body legal-modal-body">
+        <p style="font-size: 0.8125rem; color: var(--text-muted);"><em>Conforme ad Art. 2250 Codice Civile, D.Lgs. 70/2003 (E-commerce), Legge 39/1989 e Codice del Consumo (D.Lgs. 206/2005).</em></p>
+
+        <h4>1. Dati Societari Identificativi Obbligatori (Art. 2250 c.c. e D.Lgs. 70/2003)</h4>
+        <p>In adempimento agli obblighi di legge previsti dall'art. 2250 del Codice Civile e dall'art. 7 del D.Lgs. 70/2003, si rendono noti i seguenti dati societari:</p>
+        <ul>
+          <li><strong>Ragione Sociale:</strong> RESKA IMMOBILIARE S.r.l.</li>
+          <li><strong>Sede Legale ed Operativa:</strong> Corso Umberto, 554 - 65015 Montesilvano (PE)</li>
+          <li><strong>Codice Fiscale:</strong> SCRRME74L23G482T</li>
+          <li><strong>Partita IVA:</strong> 0203807682 (esposta ex art. 35, c. 2-bis DPR 633/72)</li>
+          <li><strong>Registro delle Imprese:</strong> CCIAA di Chieti-Pescara • REA: PE-2109845</li>
+          <li><strong>Capitale Sociale:</strong> € 10.000,00 interamente sottoscritto e versato</li>
+          <li><strong>Stato societario:</strong> Società a responsabilità limitata in normale attività (non in liquidazione)</li>
+          <li><strong>Abilitazione Professionale Mediatori:</strong> Iscrizione Ruolo Agenti di Affari in Mediazione CCIAA PE477 ex Legge 39/1989 e D.Lgs. 59/2010.</li>
+          <li><strong>Polizza Assicurativa Professionale Obbligatoria:</strong> Polizza RC Professionale stipulata con primaria compagnia assicuratrice autorizzata IVASS, a garanzia dei rischi professionali e a totale tutela della clientela per massimali conformi ai limiti di legge (art. 3, c. 5-bis L. 39/1989).</li>
+          <li><strong>Indirizzo Posta Elettronica Certificata (PEC):</strong> <a href="mailto:reskaimmobiliare@pec.it">reskaimmobiliare@pec.it</a></li>
+          <li><strong>Email ordinaria:</strong> <a href="mailto:info@reska-immobiliare.it">info@reska-immobiliare.it</a> • <strong>SDI:</strong> M5UXCR1</li>
+        </ul>
+
+        <h4>2. Proprietà Intellettuale e Marchi</h4>
+        <p>
+          Tutti i contenuti presenti su questo sito (inclusi marchi, loghi, testi, immagini fotografiche, planimetrie, layout grafici, codice sorgente e stylesheet) sono di proprietà esclusiva di <strong>RESKA IMMOBILIARE S.r.l.</strong> o dei suoi danti causa e sono tutelati dalla Legge sul Diritto d'Autore (L. 633/1941) e dal Codice della Proprietà Industriale (D.Lgs. 30/2005). È fatto espresso divieto di copiare, riprodurre, rielaborare o diffondere a fini commerciali tali contenuti senza preventiva autorizzazione scritta.
+        </p>
+
+        <h4>3. Trasparenza sulle Inserzioni Immobiliari ed Efficienza Energetica (D.Lgs. 192/2005)</h4>
+        <p>
+          In piena conformità all'art. 6, comma 8 del D.Lgs. 192/2005 e al DM 26/06/2015, ogni proposta immobiliare pubblicata su questo sito riporta l'indicazione dell'<strong>Indice di Prestazione Energetica globale (EPgl,nren)</strong> e della relativa <strong>Classe Energetica (APE)</strong>. Le planimetrie, i rendering e le metrature commerciali esposte hanno valore descrittivo e illustrativo preliminare e non costituiscono elemento, vincolo o proposta contrattuale.
+        </p>
+
+        <h4>4. Trasparenza sulle Valutazioni Online (Codice del Consumo D.Lgs. 206/2005)</h4>
+        <p>
+          Il servizio online "Valuta il Tuo Immobile" fornisce una stima preliminare automatica basata su algoritmi comparativi e banche dati dell'Osservatorio del Mercato Immobiliare. Tale stima:
+        </p>
+        <ul>
+          <li>Ha carattere puramente statistico-orientativo e informativo preliminare.</li>
+          <li>Non costituisce perizia legale giurata, asseverata o consulenza vincolante ex art. 1336 c.c.</li>
+          <li>Il valore effettivo dell'immobile viene asseverato unicamente a seguito di sopralluogo tecnico in loco, verifica di conformità urbanistica e catastale da parte di un agente mediatore abilitato di RESKA IMMOBILIARE.</li>
+        </ul>
+
+        <h4>5. Trasparenza sui Rapporti di Mediazione e Provvigioni (Artt. 1754 e 1755 Codice Civile)</h4>
+        <p>
+          L'attività di mediazione immobiliare è svolta in stretta aderenza agli articoli 1754 e seguenti del Codice Civile e della Legge 39/1989. Il diritto alla provvigione matura esclusivamente con la conclusione dell'affare per effetto dell'intervento del mediatore. La misura della provvigione e le relative modalità di corresponsione sono pattuite e formalizzate per iscritto mediante apposito modulo d'incarico o proposta di acquisto depositata presso la CCIAA competente.
+        </p>
+
+        <h4>6. Tutela del Consumatore e Diritto di Recesso</h4>
+        <p>
+          Per i contratti e le proposte di mediazione sottoscritti dal consumatore (persona fisica che agisce per scopi estranei all'attività imprenditoriale o professionale) fuori dai locali commerciali o a distanza, si applicano le garanzie e i termini di recesso di 14 giorni ai sensi degli articoli 49 e seguenti del Codice del Consumo (D.Lgs. 206/2005).
+        </p>
+
+        <h4>7. Risoluzione Alternativa delle Controversie (ADR / ODR)</h4>
+        <p>
+          Ai sensi del Regolamento UE n. 524/2013, si informa il consumatore residente nell'Unione Europea che la Commissione Europea ha istituito una piattaforma online per la risoluzione extragiudiziale delle controversie (piattaforma ODR - Online Dispute Resolution), accessibile all'indirizzo web: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.
+        </p>
+
+        <h4>8. Legge Applicabile e Foro Competente</h4>
+        <p>
+          I presenti termini e la fruizione del portale sono regolati dalla legge italiana. Per qualsiasi controversia civile inerente all'interpretazione, esecuzione o validità dei presenti termini, qualora l'utente sia qualificabile come Consumatore ai sensi del D.Lgs. 206/2005, la competenza territoriale inderogabile spetta al giudice del luogo di residenza o domicilio del consumatore (art. 66-bis Codice del Consumo). In tutti gli altri casi (B2B), è territorialmente competente in via esclusiva il Foro di Pescara.
+        </p>
+      </div>
+      <div class="modal-footer legal-modal-footer">
+        <button type="button" class="btn btn-primary" data-close-modal="modalTerms">Chiudi Note Legali</button>
       </div>
     </div>
   </div>

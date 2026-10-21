@@ -1577,6 +1577,71 @@ select.form-control {
   color: var(--text-muted);
 }
 
+.testimonial-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.google-review-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #F1F5F9;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334155;
+  border: 1px solid var(--border-light);
+}
+
+.google-rating-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--white);
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  margin-top: 18px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--secondary-dark);
+}
+
+.google-reviews-btn-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.btn-google-reviews {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--white);
+  color: var(--secondary-dark);
+  border: 1px solid var(--border-light);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  padding: 14px 26px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  text-decoration: none;
+}
+
+.btn-google-reviews:hover {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  color: var(--primary);
+}
+
 /* ==========================================================================
    PARTNER DISCLOSURE BANNER
    ========================================================================== */
@@ -1912,5 +1977,431 @@ select.form-control {
   color: #CBD5E1;
   line-height: 1.35;
 }
+
+/* ==========================================================================
+   LEGAL COMPLIANCE & COOKIE CONSENT STYLES (GDPR, GARANTE PRIVACY 2021)
+   ========================================================================== */
+
+/* APE Energy Badges (Color-coded Italian standard ex D.Lgs. 192/2005) */
+.badge-ape-a4 {
+  background: #059669 !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.badge-ape-g {
+  background: #DC2626 !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.ape-legal-spec {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  margin-top: 10px;
+}
+
+/* Legal Disclaimers & Omnibus Notices */
+.legal-disclaimer-box {
+  background: rgba(248, 250, 252, 0.9);
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--primary);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--secondary-light);
+  margin-bottom: 16px;
+}
+
+.legal-disclaimer-dark {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 3px solid var(--primary);
+  color: #CBD5E1;
+}
+
+.form-checkbox-secondary {
+  margin-top: 8px;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+/* Cookie Banner (Linee Guida Garante Privacy 10 giugno 2021) */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(15, 23, 42, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.45);
+  z-index: 2500;
+  padding: 22px 0;
+  color: #F8FAFC;
+  animation: slideUpBanner 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpBanner {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.cookie-banner-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+@media (min-width: 992px) {
+  .cookie-banner-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+}
+
+.cookie-banner-content {
+  flex: 1;
+}
+
+.cookie-banner-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.cookie-banner-heading-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cookie-banner-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 102, 0, 0.2);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cookie-banner-heading {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.cookie-banner-close-btn {
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.cookie-banner-close-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cookie-banner-text {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #CBD5E1;
+  margin-bottom: 6px;
+}
+
+.cookie-banner-subtext {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #94A3B8;
+  margin: 0;
+}
+
+.cookie-banner-subtext a {
+  color: #FFA366;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cookie-banner-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 576px) {
+  .cookie-banner-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+.cookie-btn {
+  padding: 10px 18px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Floating Cookie Consent Badge (Linee Guida Garante: sempre accessibile per revoca) */
+.cookie-consent-badge {
+  position: fixed;
+  bottom: 24px;
+  left: 20px;
+  z-index: 1500;
+  background: var(--secondary-dark);
+  color: #F8FAFC;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-full);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.cookie-consent-badge:hover {
+  background: var(--primary);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-orange);
+}
+
+@media (max-width: 768px) {
+  .cookie-consent-badge {
+    bottom: 74px; /* Non sovrapporsi alla barra mobile sticky */
+    padding: 8px 10px;
+  }
+  .cookie-badge-label {
+    display: none;
+  }
+}
+
+/* Legal Modals Styling */
+.modal-card-legal {
+  max-width: 780px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.legal-modal-badge {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.legal-modal-body {
+  overflow-y: auto;
+  padding: 24px 28px;
+  font-size: 0.905rem;
+  line-height: 1.68;
+  color: var(--secondary-light);
+}
+
+.legal-modal-body h4 {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: var(--secondary-dark);
+  margin: 22px 0 8px 0;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 4px;
+}
+
+.legal-modal-body h4:first-child {
+  margin-top: 0;
+}
+
+.legal-modal-body p {
+  margin-bottom: 12px;
+}
+
+.legal-modal-body ul, .legal-modal-body ol {
+  margin: 8px 0 16px 20px;
+  padding: 0;
+}
+
+.legal-modal-body li {
+  margin-bottom: 6px;
+}
+
+.legal-modal-footer {
+  padding: 16px 28px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-page);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Cookie Preferences Panel Categories */
+.cookie-pref-item {
+  background: var(--bg-page);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+
+.cookie-pref-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 14px;
+}
+
+.cookie-pref-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cookie-pref-name {
+  font-weight: 800;
+  color: var(--secondary-dark);
+  font-size: 0.9375rem;
+}
+
+.cookie-pref-status {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.status-always-active {
+  color: #059669;
+  font-weight: 700;
+}
+
+.cookie-pref-desc {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Switch Toggle UI */
+.switch-toggle {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.switch-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #CBD5E1;
+  transition: 0.25s;
+  border-radius: 34px;
+}
+
+.switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.25s;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.switch-toggle input:checked + .switch-slider {
+  background-color: var(--primary);
+}
+
+.switch-toggle input:checked + .switch-slider:before {
+  transform: translateX(22px);
+}
+
+.switch-slider.disabled {
+  background-color: #059669;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* Table styles in legal modal */
+.legal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0 18px 0;
+  font-size: 0.8125rem;
+}
+
+.legal-table th, .legal-table td {
+  border: 1px solid var(--border-light);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.legal-table th {
+  background: var(--bg-subtle);
+  font-weight: 700;
+  color: var(--secondary-dark);
+}
+
+/* Footer corporate layout enhancements */
+.footer-corporate-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #94A3B8;
+  max-width: 700px;
+}
+
+.footer-corporate-info strong {
+  color: #FFFFFF;
+}
+
 
 
