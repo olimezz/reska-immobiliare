@@ -474,11 +474,26 @@
 
     <div class="container valuation-wrapper">
       <div class="section-header">
-        <span class="badge-tag badge-tag-white">Per Proprietari e Venditori</span>
-        <h2 class="section-title" style="color: #FFFFFF;">Quanto Vale Davvero la Tua Casa?</h2>
+        <span class="badge-tag badge-tag-white">Osservatorio Immobiliare Pescara & Dintorni</span>
+        <h2 class="section-title" style="color: #FFFFFF;">Quanto Vale Davvero la Tua Casa a Pescara e Dintorni?</h2>
         <p class="section-subtitle" style="color: #CBD5E1;">
-          Richiedi una valutazione professionale comparativa basata sulle reali compravendite notarili concluse nella tua zona. Ricevi il dossier completo entro 24 ore, 100% gratuito e senza impegno.
+          Richiedi una valutazione professionale analitica basata sulle reali compravendite notarili a Pescara, Montesilvano, Francavilla, Spoltore e area metropolitana. Ricevi il dossier completo OMI entro 24 ore: 100% gratuito e senza impegno.
         </p>
+      </div>
+
+      <div class="valuation-local-badges">
+        <div class="local-badge-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span><strong>Focus Territoriale:</strong> Pescara, Montesilvano, Francavilla, Spoltore, Silvi</span>
+        </div>
+        <div class="local-badge-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span><strong>Dati Certificati:</strong> OMI Agenzia Entrate & Rogiti CCIAA PE477</span>
+        </div>
+        <div class="local-badge-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span><strong>Perizia in 24h:</strong> Report digitale + sopralluogo peritale gratuito</span>
+        </div>
       </div>
 
       <div class="valuation-box">
@@ -511,23 +526,47 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
                   </span>
                   <select name="tipologia_immobile" id="valPropertyType" class="form-control dark-input">
-                    <option value="appartamento">Appartamento / Trilocale / Quadrilocale</option>
-                    <option value="attico">Attico / Mansarda Panoramica</option>
-                    <option value="villa">Villa Indipendente / Bifamiliare</option>
-                    <option value="loft">Loft / Spazio Open Space</option>
-                    <option value="commerciale">Ufficio / Locale Commerciale</option>
+                    <option value="appartamento">Appartamento (Bilocale / Trilocale / Quadrilocale)</option>
+                    <option value="attico">Attico / Mansarda con Terrazzo (Vista Mare o Città)</option>
+                    <option value="villa">Villa Singola / Porzione di Bifamiliare</option>
+                    <option value="indipendente">Casa Indipendente / Soluzione con Giardino</option>
+                    <option value="commerciale">Ufficio / Locale Commerciale / Negozio</option>
                   </select>
                 </div>
               </div>
 
-              <!-- Città o Zona -->
+              <!-- Zona o Comune Pescara & Dintorni -->
               <div class="form-group">
-                <label class="form-label" style="color: #FFFFFF;">Città e Indirizzo Indicativo <span class="form-label-required">*</span></label>
+                <label class="form-label" style="color: #FFFFFF;">Zona o Comune di Riferimento <span class="form-label-required">*</span></label>
                 <div class="input-wrapper">
                   <span class="input-icon">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                   </span>
-                  <input type="text" name="indirizzo_zona" id="valCity" class="form-control dark-input" placeholder="es. Milano, Zona Navigli" required>
+                  <select name="citta_zona" id="valZone" class="form-control dark-input" required>
+                    <option value="pescara_centro" selected>Pescara Centro / Piazza Salotto / C.so Umberto</option>
+                    <option value="pescara_riviera">Pescara Riviera / Lungomare Nord & Sud</option>
+                    <option value="pescara_portanuova">Pescara Porta Nuova / Stadio / Viale Marconi</option>
+                    <option value="pescara_colli">Pescara Colli / Ospedale Civile</option>
+                    <option value="montesilvano_spiaggia">Montesilvano Spiaggia / Grandi Alberghi</option>
+                    <option value="montesilvano_centro">Montesilvano Centro / Colle / S. Filomena</option>
+                    <option value="francavilla">Francavilla al Mare (Centro & Litorale)</option>
+                    <option value="spoltore">Spoltore / Villa Raspa / Santa Teresa</option>
+                    <option value="citta_santangelo">Città Sant'Angelo (Marina & Borgo)</option>
+                    <option value="silvi">Silvi Marina / Riviera Adriatica</option>
+                    <option value="sambuceto">San Giovanni Teatino / Sambuceto</option>
+                    <option value="altro">Altro comune limitrofo (Area PE-CH)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Indirizzo o Via Indicativa -->
+              <div class="form-group">
+                <label class="form-label" style="color: #FFFFFF;">Via o Indirizzo Indicativo <span class="form-label-required">*</span></label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                  </span>
+                  <input type="text" name="indirizzo_via" id="valCity" class="form-control dark-input" placeholder="es. Viale Riviera, Corso Umberto, Via Firenze..." required>
                 </div>
               </div>
 
@@ -538,27 +577,43 @@
                   <span class="input-icon">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                   </span>
-                  <select name="stato_immobile" class="form-control dark-input">
+                  <select name="stato_immobile" id="valCondition" class="form-control dark-input">
                     <option value="ottimo_ristrutturato">Ottimo / Finemente Ristrutturato</option>
-                    <option value="buono_abitabile">Buono / Abitabile da subito</option>
+                    <option value="buono_abitabile" selected>Buono / Abitabile da subito</option>
+                    <option value="nuova_costruzione">Nuova Costruzione / Classe A</option>
                     <option value="da_ristrutturare">Da Ristrutturare</option>
-                    <option value="nuova_costruzione">Nuova Costruzione</option>
                   </select>
                 </div>
               </div>
 
               <!-- Piano ed Ascensore -->
               <div class="form-group">
-                <label class="form-label" style="color: #FFFFFF;">Piano</label>
+                <label class="form-label" style="color: #FFFFFF;">Piano & Pertinenze</label>
                 <div class="input-wrapper">
                   <span class="input-icon">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
                   </span>
-                  <select name="piano_ascensore" class="form-control dark-input">
+                  <select name="piano_ascensore" id="valFloor" class="form-control dark-input">
                     <option value="piano_intermedio_ascensore">Piano Intermedio (con ascensore)</option>
-                    <option value="ultimo_piano_attico">Ultimo Piano / Attico</option>
-                    <option value="piano_terra_giardino">Piano Terra con Giardino</option>
+                    <option value="ultimo_piano_attico">Ultimo Piano / Attico con Terrazzo</option>
+                    <option value="piano_terra_giardino">Piano Terra con Giardino / Ingresso Indipendente</option>
                     <option value="piano_senza_ascensore">Piano alto senza ascensore</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Garage / Posto Auto -->
+              <div class="form-group">
+                <label class="form-label" style="color: #FFFFFF;">Garage / Posto Auto</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                  </span>
+                  <select name="garage_posto_auto" id="valGarage" class="form-control dark-input">
+                    <option value="garage_privato" selected>Garage / Box Auto Privato</option>
+                    <option value="posto_auto_condominiale">Posto Auto Riservato o Condominiale</option>
+                    <option value="garage_doppio">Garage Doppio / Posti Auto Multipli</option>
+                    <option value="nessuno">Nessun garage o posto auto</option>
                   </select>
                 </div>
               </div>
@@ -572,9 +627,9 @@
                 <input type="range" min="30" max="450" value="95" step="5" class="custom-range-slider" id="valMqSlider" name="superficie_mq">
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,0.15);">
-                  <div style="font-size: 0.8125rem; color: #94A3B8;">Stima orientativa preliminare di mercato:</div>
+                  <div style="font-size: 0.8125rem; color: #94A3B8;">Stima orientativa preliminare di mercato (Pescara & Dintorni):</div>
                   <div style="font-size: 1.15rem; font-weight: 800; color: #FFA366;">
-                    <span id="valEstMin">€ 315.000</span> - <span id="valEstMax">€ 385.000</span>
+                    <span id="valEstMin">€ 195.000</span> - <span id="valEstMax">€ 238.000</span>
                   </div>
                 </div>
               </div>
@@ -591,7 +646,7 @@
           <!-- STEP 2: Dati del Proprietario per Ricevere il Dossier -->
           <div class="valuation-step-pane" id="valStep2">
             <p style="color: #CBD5E1; margin-bottom: 24px; text-align: center; font-size: 0.9375rem;">
-              Inserisci i tuoi recapiti per ricevere il <strong>dossier completo di stima</strong> e concordare, se lo desideri, un sopralluogo tecnico senza impegno.
+              Inserisci i tuoi recapiti per ricevere il <strong>dossier completo di stima per la zona di Pescara e provincia</strong> e concordare, se lo desideri, un sopralluogo tecnico senza impegno con il nostro perito abilitato.
             </p>
 
             <div class="valuation-grid">
@@ -601,7 +656,7 @@
                   <span class="input-icon">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                   </span>
-                  <input type="text" name="nome" class="form-control dark-input" placeholder="es. Laura Bianchi" required>
+                  <input type="text" name="nome" class="form-control dark-input" placeholder="es. Marco D'Angelo" required>
                 </div>
               </div>
 
@@ -611,7 +666,7 @@
                   <span class="input-icon">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                   </span>
-                  <input type="tel" name="telefono" class="form-control dark-input" placeholder="es. 338 9876543" required>
+                  <input type="tel" name="telefono" class="form-control dark-input" placeholder="es. 328 1234567" required>
                 </div>
               </div>
 
@@ -621,7 +676,7 @@
                   <span class="input-icon">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                   </span>
-                  <input type="email" name="email" class="form-control dark-input" placeholder="es. laura.bianchi@email.it" required>
+                  <input type="email" name="email" class="form-control dark-input" placeholder="es. marco.dangelo@email.it" required>
                 </div>
               </div>
 

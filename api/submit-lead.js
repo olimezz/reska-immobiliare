@@ -41,6 +41,19 @@ export default async function handler(req, res) {
       marketing_consent = ''
     } = data || {};
 
+    const zonaNome = data.citta_zona || data.zona || data.citta || '';
+    const indirizzoVia = data.indirizzo_via || data.indirizzo_zona || '';
+    const combinedZona = [zonaNome, indirizzoVia].filter(Boolean).join(' - ') || 'Pescara e Dintorni';
+    const finalTipologia = data.tipologia_immobile || data.tipologia || '';
+    const finalMetratura = data.superficie_mq ? `${data.superficie_mq} m²` : (data.metratura || '');
+    const finalCondizione = data.stato_immobile || data.condizione || '';
+    const finalNote = [
+      data.note || '',
+      data.piano_ascensore ? `Piano: ${data.piano_ascensore}` : '',
+      data.garage_posto_auto ? `Garage: ${data.garage_posto_auto}` : '',
+      data.tempistica_vendita ? `Tempistica: ${data.tempistica_vendita}` : ''
+    ].filter(Boolean).join(' | ');
+
     // Validazione base
     if (!nome || !telefono) {
       return res.status(400).json({
@@ -115,14 +128,14 @@ export default async function handler(req, res) {
         ${email},
         ${telefono},
         ${cosa_cerchi},
-        ${tipologia},
-        ${metratura},
-        ${condizione},
-        ${citta_zona || citta},
+        ${finalTipologia || tipologia},
+        ${finalMetratura || metratura},
+        ${finalCondizione || condizione},
+        ${combinedZona},
         ${stima_indicativa || stima_indicativa_calcolata},
         ${immobile_nome},
         ${immobile_id},
-        ${note},
+        ${finalNote || note},
         ${'acconsentito'},
         ${marketingConsentValue}
       ) RETURNING id, created_at;

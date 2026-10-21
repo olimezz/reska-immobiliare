@@ -1264,6 +1264,36 @@ select.form-control {
   margin: 0 auto;
 }
 
+.valuation-local-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.local-badge-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+  font-size: 0.8125rem;
+  color: #E2E8F0;
+  backdrop-filter: blur(8px);
+}
+
+.local-badge-item svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.local-badge-item strong {
+  color: #FFA366;
+}
+
 .valuation-box {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);

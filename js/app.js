@@ -135,30 +135,75 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 5. Seller Valuation Interactive Estimator
+  // 5. Seller Valuation Interactive Estimator (Calibrato su Pescara e Area Metropolitana)
   const mqSlider = document.getElementById('valMqSlider');
   const mqDisplay = document.getElementById('valMqDisplay');
   const valType = document.getElementById('valPropertyType');
+  const valZone = document.getElementById('valZone');
+  const valCondition = document.getElementById('valCondition');
+  const valFloor = document.getElementById('valFloor');
+  const valGarage = document.getElementById('valGarage');
   const valEstMin = document.getElementById('valEstMin');
   const valEstMax = document.getElementById('valEstMax');
+
+  // Quotazioni medie al m² basate sui dati OMI per l'area metropolitana di Pescara e Chieti
+  const zonePricingMap = {
+    'pescara_centro': 2350,
+    'pescara_riviera': 2550,
+    'pescara_portanuova': 1750,
+    'pescara_colli': 1550,
+    'montesilvano_spiaggia': 1850,
+    'montesilvano_centro': 1500,
+    'francavilla': 1750,
+    'spoltore': 1500,
+    'citta_santangelo': 1450,
+    'silvi': 1600,
+    'sambuceto': 1450,
+    'altro': 1650
+  };
 
   function calculateEstimate() {
     if (!mqSlider) return;
     const mq = parseInt(mqSlider.value, 10);
     if (mqDisplay) mqDisplay.textContent = mq + ' m²';
 
-    // Base average price per sqm
-    let pricePerSqm = 3600;
+    // Base price per sqm by selected zone
+    const selectedZone = valZone ? valZone.value : 'pescara_centro';
+    let pricePerSqm = zonePricingMap[selectedZone] || 2000;
+
+    // Typology coefficient
     if (valType) {
-      if (valType.value === 'attico') pricePerSqm = 4800;
-      else if (valType.value === 'villa') pricePerSqm = 4100;
-      else if (valType.value === 'loft') pricePerSqm = 3900;
-      else if (valType.value === 'commerciale') pricePerSqm = 3200;
+      if (valType.value === 'attico') pricePerSqm *= 1.25;
+      else if (valType.value === 'villa') pricePerSqm *= 1.15;
+      else if (valType.value === 'indipendente') pricePerSqm *= 1.10;
+      else if (valType.value === 'commerciale') pricePerSqm *= 0.90;
     }
 
-    const baseVal = mq * pricePerSqm;
-    const minVal = Math.round(baseVal * 0.92 / 1000) * 1000;
-    const maxVal = Math.round(baseVal * 1.12 / 1000) * 1000;
+    // Condition coefficient
+    if (valCondition) {
+      if (valCondition.value === 'nuova_costruzione') pricePerSqm *= 1.18;
+      else if (valCondition.value === 'ottimo_ristrutturato') pricePerSqm *= 1.10;
+      else if (valCondition.value === 'da_ristrutturare') pricePerSqm *= 0.82;
+    }
+
+    // Floor & Exposure coefficient
+    if (valFloor) {
+      if (valFloor.value === 'ultimo_piano_attico') pricePerSqm *= 1.08;
+      else if (valFloor.value === 'piano_terra_giardino') pricePerSqm *= 1.05;
+      else if (valFloor.value === 'piano_senza_ascensore') pricePerSqm *= 0.88;
+    }
+
+    let baseVal = mq * pricePerSqm;
+
+    // Garage add-on value typical of Pescara area
+    if (valGarage) {
+      if (valGarage.value === 'garage_privato') baseVal += 22000;
+      else if (valGarage.value === 'garage_doppio') baseVal += 35000;
+      else if (valGarage.value === 'posto_auto_condominiale') baseVal += 8000;
+    }
+
+    const minVal = Math.round((baseVal * 0.92) / 1000) * 1000;
+    const maxVal = Math.round((baseVal * 1.10) / 1000) * 1000;
 
     const formatter = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
     if (valEstMin) valEstMin.textContent = formatter.format(minVal);
@@ -171,12 +216,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  if (mqSlider) {
-    mqSlider.addEventListener('input', calculateEstimate);
-  }
-  if (valType) {
-    valType.addEventListener('change', calculateEstimate);
-  }
+  [mqSlider, valType, valZone, valCondition, valFloor, valGarage].forEach(el => {
+    if (el) {
+      el.addEventListener('input', calculateEstimate);
+      el.addEventListener('change', calculateEstimate);
+    }
+  });
   calculateEstimate();
 
   // Valuation Steps Navigation
