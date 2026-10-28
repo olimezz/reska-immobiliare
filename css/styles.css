@@ -2433,5 +2433,196 @@ select.form-control {
   color: #FFFFFF;
 }
 
+/* ==========================================================================
+   SOCIAL MEDIA COMMUNITY SECTION
+   ========================================================================== */
+.social-section {
+  background: var(--bg-page);
+  padding: 80px 0;
+  position: relative;
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+@media (min-width: 768px) {
+  .social-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.social-card {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.social-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.social-card-instagram::before {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.social-card-facebook::before {
+  background: #1877F2;
+}
+
+.social-card-tiktok::before {
+  background: linear-gradient(90deg, #00F2FE, #FE0979);
+}
+
+.social-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(255, 102, 0, 0.25);
+}
+
+.social-card:hover::before {
+  opacity: 1;
+}
+
+.social-icon-wrapper {
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: transform var(--transition-bounce);
+  color: var(--white);
+}
+
+.social-card:hover .social-icon-wrapper {
+  transform: scale(1.1) rotate(4deg);
+}
+
+.social-icon-instagram {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  box-shadow: 0 8px 20px rgba(214, 36, 159, 0.3);
+}
+
+.social-icon-facebook {
+  background: #1877F2;
+  box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3);
+}
+
+.social-icon-tiktok {
+  background: #000000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.social-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 12px;
+}
+
+.social-badge-ig { background: rgba(225, 48, 108, 0.1); color: #E1306C; }
+.social-badge-fb { background: rgba(24, 119, 242, 0.1); color: #1877F2; }
+.social-badge-tt { background: rgba(0, 0, 0, 0.08); color: #0F172A; }
+
+.social-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: var(--secondary-dark);
+  margin-bottom: 6px;
+}
+
+.social-handle {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+.social-card-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.social-btn {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 0.875rem;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all var(--transition-normal);
+}
+
+.social-btn-ig {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(220, 39, 67, 0.25);
+}
+.social-btn-ig:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 39, 67, 0.4);
+  color: #FFFFFF;
+}
+
+.social-btn-fb {
+  background: #1877F2;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(24, 119, 242, 0.25);
+}
+.social-btn-fb:hover {
+  background: #166fe5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4);
+  color: #FFFFFF;
+}
+
+.social-btn-tt {
+  background: #000000;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+.social-btn-tt:hover {
+  background: #1E293B;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  color: #FFFFFF;
+}
+
 
 
