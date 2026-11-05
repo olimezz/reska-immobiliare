@@ -32,6 +32,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  function escapeHTML(str) {
+    return String(str || '').replace(/[&<>'"]/g, tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag] || tag));
+  }
+
   // 3. Property Data for "Scopri di più" Modals (Conformità APE ex D.Lgs. 192/2005)
   const propertiesData = {
     '1': {
@@ -50,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       `,
       image: 'images/palazzina-strada-parco.jpg',
+      gallery: ['images/palazzina-strada-parco.jpg'],
       badge: 'In Evidenza'
     },
     '2': {
@@ -85,38 +96,227 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       `,
       image: 'images/casa2.webp',
+      gallery: ['images/casa2.webp', 'images/casa2.jpg'],
       badge: 'Nuova Costruzione'
     }
   };
 
-  // 4. Property Modal Handler
+  // 4. Property Modal Handler & Dynamic CMS Sync
   const propertyModal = document.getElementById('propertyModal');
   const propertyModalClose = document.getElementById('propertyModalClose');
-  const learnMoreButtons = document.querySelectorAll('.btn-property-detail');
 
-  learnMoreButtons.forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      const propId = this.getAttribute('data-property-id');
-      const prop = propertiesData[propId];
-      if (!prop) return;
+  function bindPropertyDetailButtons() {
+    document.querySelectorAll('.btn-property-detail').forEach(btn => {
+      btn.onclick = function (e) {
+        e.preventDefault();
+        const propId = this.getAttribute('data-property-id');
+        const prop = propertiesData[propId];
+        if (!prop) return;
 
-      document.getElementById('modalPropTitle').textContent = prop.title;
-      document.getElementById('modalPropLocation').textContent = prop.location;
-      document.getElementById('modalPropPrice').textContent = prop.price;
-      document.getElementById('modalPropSpecs').textContent = prop.specs;
-      document.getElementById('modalPropDesc').innerHTML = prop.description;
-      document.getElementById('modalPropImg').src = prop.image;
-      document.getElementById('modalPropBadge').textContent = prop.badge;
+        document.getElementById('modalPropTitle').textContent = prop.title;
+        document.getElementById('modalPropLocation').textContent = prop.location;
+        document.getElementById('modalPropPrice').textContent = prop.price;
+        document.getElementById('modalPropSpecs').textContent = prop.specs;
+        document.getElementById('modalPropDesc').innerHTML = prop.description;
+        const mainImgEl = document.getElementById('modalPropImg');
+        mainImgEl.src = prop.image;
+        mainImgEl.alt = prop.title;
+        document.getElementById('modalPropBadge').textContent = prop.badge;
 
-      // Hidden form fields
-      document.getElementById('modalPropFormName').value = prop.title;
-      document.getElementById('modalPropFormId').value = prop.id;
+        // Render gallery thumbnails if > 1 image
+        const galContainer = document.getElementById('modalPropGallery');
+        const galleryList = Array.isArray(prop.gallery) && prop.gallery.length > 0 ? prop.gallery : [prop.image];
+        if (galContainer) {
+          if (galleryList.length > 1) {
+            galContainer.style.display = 'flex';
+            galContainer.innerHTML = galleryList.map((imgSrc, i) => `
+              <button type="button" data-gal-src="${escapeHTML(imgSrc)}" style="border: 2px solid ${i === 0 ? '#FF6600' : 'transparent'}; border-radius: 8px; overflow: hidden; width: 72px; height: 52px; flex-shrink: 0; padding: 0; cursor: pointer; background: #0F172A;">
+                <img src="${escapeHTML(imgSrc)}" alt="Miniatura ${i + 1}" style="width: 100%; height: 100%; object-fit: cover;">
+              </button>
+            `).join('');
+            galContainer.querySelectorAll('[data-gal-src]').forEach(thumbBtn => {
+              thumbBtn.addEventListener('click', function () {
+                mainImgEl.src = this.getAttribute('data-gal-src');
+                galContainer.querySelectorAll('[data-gal-src]').forEach(b => (b.style.borderColor = 'transparent'));
+                this.style.borderColor = '#FF6600';
+              });
+            });
+          } else {
+            galContainer.style.display = 'none';
+            galContainer.innerHTML = '';
+          }
+        }
 
-      propertyModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
+        // Hidden form fields
+        document.getElementById('modalPropFormName').value = prop.title;
+        document.getElementById('modalPropFormId').value = prop.id;
+
+        propertyModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      };
     });
-  });
+  }
+
+  bindPropertyDetailButtons();
+
+  // Dynamic CMS Loader (aggiorna immobili e testi statici dal CMS No-Code)
+  function applyCmsDataToPage(cmsData) {
+    if (!cmsData) return;
+
+    // A. Aggiorna griglia immobili
+    if (Array.isArray(cmsData.properties) && cmsData.properties.length > 0) {
+      const grid = document.querySelector('.properties-grid');
+      if (grid) {
+        grid.innerHTML = cmsData.properties.filter(p => p.visible !== false).map(p => {
+          const idKey = String(p.id);
+          const apeClass = p.ape_class || 'G';
+          const isGreenApe = apeClass.startsWith('A') || apeClass === 'B';
+          const specsParts = [
+            p.surface,
+            p.rooms,
+            p.bathrooms,
+            p.floor,
+            `Classe Energetica: ${apeClass}${p.ape_epgl ? ` (${p.ape_epgl})` : ''}`
+          ].filter(Boolean);
+
+          propertiesData[idKey] = {
+            id: p.code || `PROP-0${p.id}`,
+            title: p.modal_title || p.title,
+            location: p.location,
+            price: p.price || 'Trattativa Riservata',
+            specs: specsParts.join(' • '),
+            description: `${p.description || ''}<div class="ape-legal-spec" style="margin-top: 12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${isGreenApe ? '#059669' : '#DC2626'}" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span><strong>Attestato di Prestazione Energetica (D.Lgs. 192/2005):</strong> Classe ${escapeHTML(apeClass)} ${p.ape_epgl ? `• Indice EPgl,nren: ${escapeHTML(p.ape_epgl)}` : ''}</span></div>`,
+            image: p.main_image || 'images/palazzina-strada-parco.jpg',
+            gallery: Array.isArray(p.gallery) && p.gallery.length > 0 ? p.gallery : [p.main_image],
+            badge: p.category || 'In Evidenza'
+          };
+
+          return `
+            <article class="property-card">
+              <div class="property-img-wrapper">
+                <img src="${escapeHTML(p.main_image || 'images/palazzina-strada-parco.jpg')}" alt="${escapeHTML(p.title)}" class="property-img" loading="lazy" width="600" height="400">
+                <span class="property-badge-status">${escapeHTML(p.category || 'In Evidenza')}</span>
+                <span class="property-badge-energy ${isGreenApe ? 'badge-ape-a4' : 'badge-ape-g'}">APE: Classe ${escapeHTML(apeClass)}${p.ape_epgl ? ` • ${escapeHTML(p.ape_epgl.split(' ')[0])} kWh/m²a` : ''}</span>
+                <div class="property-price-overlay">
+                  <span class="property-price">${escapeHTML(p.price || 'Trattativa Riservata')}</span>
+                </div>
+              </div>
+              <div class="property-body">
+                <div class="property-location">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>${escapeHTML(p.location)}</span>
+                </div>
+                <h3 class="property-title">${escapeHTML(p.title)}</h3>
+                <div class="property-specs">
+                  <div class="spec-item">
+                    <span class="spec-icon-row">Sup.</span>
+                    <span class="spec-value">${escapeHTML(p.surface || '-')}</span>
+                  </div>
+                  <div class="spec-item">
+                    <span class="spec-icon-row">Camere/Liv.</span>
+                    <span class="spec-value">${escapeHTML(p.rooms || p.floor || '-')}</span>
+                  </div>
+                  <div class="spec-item">
+                    <span class="spec-icon-row">Bagni/Info</span>
+                    <span class="spec-value">${escapeHTML(p.bathrooms || p.floor || '-')}</span>
+                  </div>
+                </div>
+                <div class="ape-legal-spec">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="${isGreenApe ? '#059669' : '#DC2626'}" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  <span><strong>APE di Legge:</strong> Classe ${escapeHTML(apeClass)} ${p.ape_epgl ? `• EPgl,nren: ${escapeHTML(p.ape_epgl)}` : ''}</span>
+                </div>
+                <div class="property-footer">
+                  <button class="btn btn-primary btn-block btn-property-detail" data-property-id="${escapeHTML(idKey)}">
+                    <span>Scopri di più</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        bindPropertyDetailButtons();
+      }
+    }
+
+    // B. Aggiorna testi statici se personalizzati nel CMS
+    const s = cmsData.settings;
+    if (s) {
+      if (s.hero) {
+        const heroBadge = document.querySelector('.hero-badge-partner span');
+        if (heroBadge && s.hero.badge) heroBadge.textContent = s.hero.badge;
+
+        const heroTitle = document.querySelector('.hero-title');
+        if (heroTitle && (s.hero.title_before || s.hero.title_highlight)) {
+          heroTitle.innerHTML = `${escapeHTML(s.hero.title_before)}<span class="hero-title-highlight">${escapeHTML(s.hero.title_highlight)}</span>${escapeHTML(s.hero.title_after)}`;
+        }
+
+        const heroDesc = document.querySelector('.hero-description');
+        if (heroDesc && s.hero.description) heroDesc.textContent = s.hero.description;
+
+        const heroImg = document.querySelector('.hero-backdrop img');
+        if (heroImg && s.hero.hero_image) heroImg.src = s.hero.hero_image;
+      }
+
+      if (s.about) {
+        const advSec = document.getElementById('perche-sceglierci');
+        if (advSec) {
+          const badge = advSec.querySelector('.badge-tag');
+          const title = advSec.querySelector('.section-title');
+          const sub = advSec.querySelector('.section-subtitle');
+          if (badge && s.about.badge) badge.textContent = s.about.badge;
+          if (title && s.about.title) title.textContent = s.about.title;
+          if (sub && s.about.subtitle) sub.textContent = s.about.subtitle;
+
+          const cards = advSec.querySelectorAll('.feature-card');
+          [1, 2, 3, 4].forEach((n, idx) => {
+            if (cards[idx]) {
+              const t = cards[idx].querySelector('.feature-title');
+              const d = cards[idx].querySelector('.feature-desc');
+              if (t && s.about[`feat${n}_title`]) t.textContent = s.about[`feat${n}_title`];
+              if (d && s.about[`feat${n}_desc`]) d.textContent = s.about[`feat${n}_desc`];
+            }
+          });
+        }
+      }
+
+      if (s.social) {
+        const igCard = document.querySelector('.social-card-instagram');
+        if (igCard) {
+          if (s.social.instagram_handle) igCard.querySelector('.social-handle span').textContent = s.social.instagram_handle;
+          if (s.social.instagram_url) igCard.querySelector('a.social-btn').href = s.social.instagram_url;
+        }
+        const fbCard = document.querySelector('.social-card-facebook');
+        if (fbCard) {
+          if (s.social.facebook_name) fbCard.querySelector('.social-handle span').textContent = s.social.facebook_name;
+          if (s.social.facebook_url) fbCard.querySelector('a.social-btn').href = s.social.facebook_url;
+        }
+        const ttCard = document.querySelector('.social-card-tiktok');
+        if (ttCard) {
+          if (s.social.tiktok_handle) ttCard.querySelector('.social-handle span').textContent = s.social.tiktok_handle;
+          if (s.social.tiktok_url) ttCard.querySelector('a.social-btn').href = s.social.tiktok_url;
+        }
+      }
+    }
+  }
+
+  // Carica stato locale immediato se l'admin ha salvato modifiche nello stesso browser, poi interroga /api/cms
+  try {
+    const localCmsRaw = localStorage.getItem('reska_cms_state_v1');
+    if (localCmsRaw) {
+      applyCmsDataToPage(JSON.parse(localCmsRaw));
+    }
+  } catch (_e) {}
+
+  fetch('/api/cms')
+    .then(r => (r.ok ? r.json() : null))
+    .then(data => {
+      if (data && data.success && data.dbConnected) {
+        applyCmsDataToPage(data);
+      }
+    })
+    .catch(() => {});
 
   if (propertyModalClose) {
     propertyModalClose.addEventListener('click', () => {
@@ -135,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 6. Toast Notification UI
+  // 6. Toast Notification UI (con sanitizzazione anti-XSS)
   function showToast(title, message, isError = false) {
     let toast = document.getElementById('reska-toast');
     if (!toast) {
@@ -150,8 +350,8 @@ document.addEventListener('DOMContentLoaded', function () {
         ${isError ? '✕' : '✓'}
       </div>
       <div>
-        <div class="toast-title">${title}</div>
-        <div class="toast-message">${message}</div>
+        <div class="toast-title">${escapeHTML(title)}</div>
+        <div class="toast-message">${escapeHTML(message)}</div>
       </div>
     `;
 
