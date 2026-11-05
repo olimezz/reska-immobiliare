@@ -92,8 +92,8 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
       whatsapp_number: '393282912552',
       email: 'info@reska-immobiliare.it',
       pec: 'reskaimmobiliare@pec.it',
-      address: 'Corso Umberto, 554 - 65015 Montesilvano (PE)',
-      footer_about: "RESKA IMMOBILIARE S.r.l. è il punto di riferimento per l'intermediazione, la stima e la compravendita di immobili residenziali e commerciali di pregio. Assistenza d'eccellenza, conformità urbanistico-catastale e trasparenza in ogni fase del percorso immobiliare."
+      address: 'Via Napoli, 23',
+      footer_about: "RESKA IMMOBILIARE è il punto di riferimento per l'intermediazione, la stima e la compravendita di immobili residenziali e commerciali di pregio. Assistenza d'eccellenza, conformità urbanistico-catastale e trasparenza in ogni fase del percorso immobiliare."
     },
     social: {
       instagram_handle: '@reska_immobiliare',
