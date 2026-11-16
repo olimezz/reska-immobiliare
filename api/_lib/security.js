@@ -152,6 +152,7 @@ export function setSecurityHeaders(req, res) {
     'Access-Control-Allow-Headers',
     'Authorization, X-CSRF-Token, X-Requested-With, Accept, Content-Type'
   );
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'DENY');
 }

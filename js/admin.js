@@ -58,84 +58,13 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
   <li><strong>Isolamento Termo-Acustico Totale:</strong> Infissi con vetrocamera a gas Argon e tapparelle elettriche motorizzate.</li>
 </ul>`,
       visible: true
-    },
-    {
-      id: 3,
-      code: 'PROP-03',
-      title: 'Quadrilocale Luminoso con Balcone Perimetrale e Posto Auto',
-      modal_title: 'Quadrilocale Santa Filomena con Posto Auto',
-      category: 'In Evidenza',
-      location: 'Montesilvano (PE) • Corso Umberto I (Santa Filomena)',
-      price: '€ 150.000',
-      surface: '90 m²',
-      rooms: '4 Locali (3 Camere)',
-      bathrooms: '1 Bagno',
-      floor: '1° Piano con Balcone',
-      ape_class: 'F',
-      ape_epgl: '142,50 kWh/m² anno',
-      main_image: 'images/property-1.jpg',
-      gallery: ['images/property-1.jpg'],
-      description: `<p>Montesilvano, nella servitissima zona di <strong>Santa Filomena</strong> lungo <strong>Corso Umberto I</strong>, al confine con Pescara e vicino al mare.</p><p>Appartamento quadrilocale di 90 mq composto da disimpegno, tinello con cucinotto, 3 ampie camere da letto, bagno finestrato, spazioso balcone perimetrale vivibile e comodo posto auto.</p>`,
-      visible: true
-    },
-    {
-      id: 4,
-      code: 'PROP-04',
-      title: 'Trilocale a Pochi Passi dal Mare con Terrazzo Vivibile',
-      modal_title: 'Trilocale Porto Allegro con Terrazzo e Posto Auto',
-      category: 'Esclusiva RESKA',
-      location: 'Montesilvano (PE) • Zona Porto Allegro / Riviera',
-      price: 'Trattativa Riservata',
-      surface: '90 m²',
-      rooms: '3 Locali (2 Camere)',
-      bathrooms: '2 Bagni',
-      floor: '5° Piano con Ascensore',
-      ape_class: 'C',
-      ape_epgl: '78,40 kWh/m² anno',
-      main_image: 'images/property-2.jpg',
-      gallery: ['images/property-2.jpg'],
-      description: `<p>A Montesilvano Spiaggia, a due passi da Porto Allegro e dal mare.</p><p>Appartamento di 90 mq al 5° piano con ascensore: soggiorno open space con angolo cottura, ampio terrazzo abitabile coperto, due camere, doppi servizi, balcone e posto auto assegnato.</p>`,
-      visible: true
-    },
-    {
-      id: 5,
-      code: 'PROP-05',
-      title: 'Bilocale Panoramico con Terrazzo Vista Mare',
-      modal_title: 'Bilocale Vista Mare - Silvi Marina',
-      category: 'Investimento',
-      location: 'Silvi Marina (TE) • Via Ticino',
-      price: 'Trattativa Riservata',
-      surface: '45 m²',
-      rooms: '2 Locali (1 Camera)',
-      bathrooms: '1 Bagno',
-      floor: '4° Piano con Ascensore',
-      ape_class: 'D',
-      ape_epgl: '95,10 kWh/m² anno',
-      main_image: 'images/property-3.jpg',
-      gallery: ['images/property-3.jpg'],
-      description: `<p>A Silvi Marina, in Via Ticino a ridosso della spiaggia.</p><p>Bilocale ristrutturato di 45 mq al 4° piano con ascensore: soggiorno con angolo cottura, camera matrimoniale, bagno, splendido terrazzo vista mare e posto auto condominiale.</p>`,
-      visible: true
-    },
-    {
-      id: 6,
-      code: 'PROP-06',
-      title: 'Locale Commerciale C/1 con 3 Vetrine e Piazzale Privato',
-      modal_title: 'Locale Commerciale Via Arno - Montesilvano',
-      category: 'Commerciale',
-      location: 'Montesilvano (PE) • Via Arno (Confine Pescara)',
-      price: 'Trattativa Riservata',
-      surface: '92 m²',
-      rooms: '2 Vani Commerciali',
-      bathrooms: '2 Bagni',
-      floor: 'Piano Terra Fronte Strada',
-      ape_class: 'E',
-      ape_epgl: '118,30 kWh/m² anno',
-      main_image: 'images/hero.jpg',
-      gallery: ['images/hero.jpg'],
-      description: `<p>Montesilvano, Via Arno (confine Pescara). Locale commerciale C/1 di 92 mq commerciali con 3 vetrine fronte strada, piazzale privato esterno di 40 mq per parcheggio clienti e doppi servizi a norma.</p>`,
-      visible: true
     }
   ];
+
+  // Endpoint Cloud condiviso: usa automaticamente il backend live anche se admin.html viene aperto in locale sul Mac/PC
+  const API_BASE = (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'https://reska-immobiliare.vercel.app'
+    : '';
 
   const INITIAL_SETTINGS = {
     hero: {
@@ -219,12 +148,17 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
   }
 
   function getAuthToken() {
-    return sessionStorage.getItem(STORAGE_AUTH_TOKEN) || '';
+    return sessionStorage.getItem(STORAGE_AUTH_TOKEN) || localStorage.getItem(STORAGE_AUTH_TOKEN) || '';
   }
 
   function setAuthToken(token) {
-    if (token) sessionStorage.setItem(STORAGE_AUTH_TOKEN, token);
-    else sessionStorage.removeItem(STORAGE_AUTH_TOKEN);
+    if (token) {
+      sessionStorage.setItem(STORAGE_AUTH_TOKEN, token);
+      try { localStorage.setItem(STORAGE_AUTH_TOKEN, token); } catch (_e) {}
+    } else {
+      sessionStorage.removeItem(STORAGE_AUTH_TOKEN);
+      try { localStorage.removeItem(STORAGE_AUTH_TOKEN); } catch (_e) {}
+    }
   }
 
   function loadLocalCmsState() {
@@ -245,7 +179,7 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
     try {
       localStorage.setItem(STORAGE_CMS_KEY, JSON.stringify(cmsState));
     } catch (_e) {
-      showToast('Attenzione: memoria browser quasi piena per le immagini locali.', true);
+      // Se localStorage è pieno (es. troppe foto ad alta risoluzione), non blocca il salvataggio Cloud
     }
   }
 
@@ -280,8 +214,8 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
     return email.toLowerCase().trim() === expectedEmail && inputHash === expectedHash;
   }
 
-  // Compressione & conversione automatica immagine in WebP tramite HTML5 Canvas
-  function compressAndOptimizeImage(file, maxWidth = 1280, quality = 0.8) {
+  // Compressione & conversione automatica immagine (WebP + fallback JPEG per iPhone/iOS Safari)
+  function compressAndOptimizeImage(file, maxWidth = 1000, quality = 0.75) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = function (ev) {
@@ -289,19 +223,37 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
         img.onload = function () {
           let width = img.width;
           let height = img.height;
-          if (width > maxWidth) {
-            height = Math.round((height * maxWidth) / width);
-            width = maxWidth;
+          if (width > maxWidth || height > maxWidth) {
+            if (width >= height) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            } else {
+              width = Math.round((width * maxWidth) / height);
+              height = maxWidth;
+            }
           }
           const canvas = document.createElement('canvas');
           canvas.width = width;
           canvas.height = height;
           const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, width, height);
           ctx.drawImage(img, 0, 0, width, height);
-          const dataUrl = canvas.toDataURL('image/webp', quality);
+
+          // Su iOS Safari toDataURL('image/webp') non è supportato e restituirebbe un PNG enorme non compresso:
+          // verifichiamo il mime effettivo e usiamo image/jpeg compresso come fallback universale mobile/desktop
+          let dataUrl = canvas.toDataURL('image/webp', quality);
+          let mimeType = 'image/webp';
+          let ext = '.webp';
+          if (!dataUrl.startsWith('data:image/webp')) {
+            dataUrl = canvas.toDataURL('image/jpeg', quality);
+            mimeType = 'image/jpeg';
+            ext = '.jpg';
+          }
+
           resolve({
-            name: file.name.replace(/\.[^.]+$/, '') + '.webp',
-            mime_type: 'image/webp',
+            name: file.name.replace(/\.[^.]+$/, '') + ext,
+            mime_type: mimeType,
             size_bytes: Math.round((dataUrl.length * 3) / 4),
             url: dataUrl
           });
@@ -350,11 +302,11 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
       fetchLeads();
     }
 
-    // Controlla se esiste già una sessione valida
+    // Controlla se esiste già una sessione valida sul server Cloud
     const existingToken = getAuthToken();
-    if (existingToken) {
+    if (existingToken && !existingToken.startsWith('local_jwt_')) {
       try {
-        const res = await fetch('/api/auth', {
+        const res = await fetch(`${API_BASE}/api/auth`, {
           headers: { Authorization: `Bearer ${existingToken}` }
         });
         if (res.ok) {
@@ -363,18 +315,11 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
             await enterDashboard(data.admin);
             return;
           }
-        } else if (existingToken.startsWith('local_jwt_')) {
-          const savedEmail = sessionStorage.getItem('reska_cms_admin_email') || 'admin@reska-immobiliare.it';
-          await enterDashboard({ email: savedEmail });
-          return;
         }
-      } catch (_err) {
-        if (existingToken.startsWith('local_jwt_')) {
-          const savedEmail = sessionStorage.getItem('reska_cms_admin_email') || 'admin@reska-immobiliare.it';
-          await enterDashboard({ email: savedEmail });
-          return;
-        }
-      }
+        setAuthToken('');
+      } catch (_err) {}
+    } else if (existingToken && existingToken.startsWith('local_jwt_')) {
+      setAuthToken('');
     }
 
     // Login Form Submit
@@ -388,7 +333,7 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
         submitBtn.disabled = true;
 
         try {
-          const response = await fetch('/api/auth', {
+          const response = await fetch(`${API_BASE}/api/auth`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ action: 'login', email, password })
@@ -401,6 +346,7 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
               sessionStorage.setItem('reska_cms_admin_email', data.admin.email);
               await enterDashboard(data.admin);
               showToast('Accesso amministratore effettuato con successo!');
+              submitBtn.disabled = false;
               return;
             }
           } else if (response.status === 401 || response.status === 429) {
@@ -411,7 +357,7 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
             return;
           }
         } catch (_networkErr) {
-          // Server API non attivo (es. apertura file statico in locale): usa verifica crittografica SHA-256 locale
+          // Fallback offline solo se non c'è connessione internet
         }
 
         const validLocal = await verifyLocalCredentials(email, password);
@@ -420,7 +366,7 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
           setAuthToken(localToken);
           sessionStorage.setItem('reska_cms_admin_email', email);
           await enterDashboard({ email });
-          showToast('Accesso effettuato (Modalità Locale Sincronizzata).');
+          showToast('Accesso effettuato (Modalità Offline).');
         } else {
           loginAlert.textContent = 'Credenziali non valide. Verifica email e password.';
           loginAlert.classList.add('show');
@@ -432,7 +378,7 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
     // Logout
     document.getElementById('logoutBtn')?.addEventListener('click', async () => {
       try {
-        await fetch('/api/auth', {
+        await fetch(`${API_BASE}/api/auth`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'logout' })
@@ -467,14 +413,14 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
     });
 
     // =======================================================================
-    // SINCRONIZZAZIONE CON SERVER / DATABASE
+    // SINCRONIZZAZIONE CON SERVER / DATABASE CLOUD
     // =======================================================================
     async function fetchCmsDataFromServer() {
       const syncStatus = document.getElementById('cmsSyncStatus');
       const dbNotice = document.getElementById('dbSyncNotice');
 
       try {
-        const res = await fetch('/api/cms');
+        const res = await fetch(`${API_BASE}/api/cms?t=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
           if (data.success && data.dbConnected) {
@@ -487,11 +433,10 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
               syncStatus.style.background = '#ECFDF5';
               syncStatus.style.borderColor = '#A7F3D0';
               syncStatus.style.color = '#047857';
-              syncStatus.innerHTML = '<span class="status-pill-dot" style="background:#10B981;"></span><span>Database Cloud Connesso</span>';
+              syncStatus.innerHTML = '<span class="status-pill-dot" style="background:#10B981;"></span><span>Database Cloud Connesso (Telefono + PC)</span>';
             }
             if (dbNotice) dbNotice.style.display = 'none';
           } else {
-            // DB non collegato su Vercel (modalità locale)
             if (syncStatus) {
               syncStatus.style.background = '#FFFBEB';
               syncStatus.style.borderColor = '#FCD34D';
@@ -502,12 +447,11 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
           }
         }
       } catch (_e) {
-        // Mantiene stato locale già caricato
         if (syncStatus) {
           syncStatus.style.background = '#FFFBEB';
           syncStatus.style.borderColor = '#FCD34D';
           syncStatus.style.color = '#B45309';
-          syncStatus.innerHTML = '<span class="status-pill-dot" style="background:#F59E0B;"></span><span>Modalità Locale</span>';
+          syncStatus.innerHTML = '<span class="status-pill-dot" style="background:#F59E0B;"></span><span>Modalità Offline</span>';
         }
         if (dbNotice) dbNotice.style.display = 'block';
       }
@@ -700,7 +644,7 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
       const gallery = currentEditingGallery.length > 0 ? [...currentEditingGallery] : ['images/property-1.jpg'];
 
       const propertyObj = {
-        id: editId ? Number(editId) : Date.now(),
+        id: editId ? Number(editId) : undefined,
         code: editId ? `PROP-0${editId}` : `PROP-${Date.now().toString().slice(-3)}`,
         title: document.getElementById('editPropTitle').value.trim(),
         modal_title: document.getElementById('editPropTitle').value.trim(),
@@ -719,18 +663,11 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
         visible: true
       };
 
-      // Aggiorna stato locale immediatamente
-      if (editId) {
-        const idx = cmsState.properties.findIndex(p => Number(p.id) === Number(editId));
-        if (idx !== -1) cmsState.properties[idx] = propertyObj;
-      } else {
-        cmsState.properties.push(propertyObj);
-      }
-      saveLocalCmsState();
+      const submitBtn = this.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
 
-      // Sincronizza con API server
       try {
-        const res = await fetch('/api/cms', {
+        const res = await fetch(`${API_BASE}/api/cms`, {
           method: editId ? 'PUT' : 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -738,18 +675,32 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
           },
           body: JSON.stringify({ resource: 'property', property: propertyObj })
         });
-        if (res.ok) {
-          const data = await res.json();
-          if (data.property && data.property.id) {
-            propertyObj.id = data.property.id;
-            saveLocalCmsState();
-          }
-        }
-      } catch (_err) {}
 
-      renderPropertiesGrid();
-      closePropertyEditor();
-      showToast(editId ? 'Immobile aggiornato e pubblicato!' : 'Nuovo immobile pubblicato in vetrina!');
+        if (res.status === 401) {
+          showToast('Sessione scaduta: effettua nuovamente il login.', true);
+          setAuthToken('');
+          dashboardView.classList.remove('active');
+          loginView.style.display = 'flex';
+          if (submitBtn) submitBtn.disabled = false;
+          return;
+        }
+
+        if (!res.ok) {
+          const errJson = await res.json().catch(() => ({}));
+          showToast(errJson.error || `Errore salvataggio Cloud (HTTP ${res.status}). Riprova con meno foto.`, true);
+          if (submitBtn) submitBtn.disabled = false;
+          return;
+        }
+
+        await fetchCmsDataFromServer();
+        renderPropertiesGrid();
+        closePropertyEditor();
+        showToast(editId ? 'Immobile aggiornato sul Cloud (visibile su Telefono e PC)!' : 'Nuovo immobile pubblicato sul Cloud (visibile su Telefono e PC)!');
+      } catch (_err) {
+        showToast('Errore di rete durante la sincronizzazione con il server Cloud.', true);
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
     });
 
     async function deleteProperty(propId) {
@@ -757,12 +708,8 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
       if (!target) return;
       if (!window.confirm(`Vuoi davvero eliminare l'immobile "${target.title}" dalla vetrina?`)) return;
 
-      cmsState.properties = cmsState.properties.filter(p => Number(p.id) !== Number(propId));
-      saveLocalCmsState();
-      renderPropertiesGrid();
-
       try {
-        await fetch(`/api/cms?resource=property&id=${propId}`, {
+        const res = await fetch(`${API_BASE}/api/cms?resource=property&id=${propId}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
@@ -770,9 +717,21 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
           },
           body: JSON.stringify({ resource: 'property', id: propId })
         });
-      } catch (_e) {}
 
-      showToast('Immobile rimosso dalla vetrina.');
+        if (res.status === 401) {
+          showToast('Sessione scaduta: effettua nuovamente il login.', true);
+          setAuthToken('');
+          dashboardView.classList.remove('active');
+          loginView.style.display = 'flex';
+          return;
+        }
+
+        await fetchCmsDataFromServer();
+        renderPropertiesGrid();
+        showToast('Immobile rimosso dal Cloud (aggiornato su Telefono e PC).');
+      } catch (_e) {
+        showToast('Errore di rete durante l\'eliminazione.', true);
+      }
     }
 
     // =======================================================================
@@ -879,7 +838,7 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
       saveLocalCmsState();
 
       try {
-        await fetch('/api/cms', {
+        const res = await fetch(`${API_BASE}/api/cms`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -887,9 +846,26 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
           },
           body: JSON.stringify({ resource: 'settings', settings: cmsState.settings })
         });
-      } catch (_err) {}
 
-      showToast('Contenuti statici della pagina salvati e pubblicati!');
+        if (res.status === 401) {
+          showToast('Sessione scaduta: effettua nuovamente il login.', true);
+          setAuthToken('');
+          dashboardView.classList.remove('active');
+          loginView.style.display = 'flex';
+          return;
+        }
+
+        if (!res.ok) {
+          showToast('Errore durante il salvataggio dei contenuti sul server.', true);
+          return;
+        }
+
+        await fetchCmsDataFromServer();
+        populateSettingsForm();
+        showToast('Contenuti salvati sul Cloud (aggiornati su Telefono e PC)!');
+      } catch (_err) {
+        showToast('Errore di rete durante il salvataggio dei contenuti.', true);
+      }
     });
 
     document.getElementById('btnResetDefaultContent')?.addEventListener('click', () => {
@@ -897,7 +873,7 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
       cmsState.settings = JSON.parse(JSON.stringify(INITIAL_SETTINGS));
       saveLocalCmsState();
       populateSettingsForm();
-      showToast('Testi predefiniti ripristinati.');
+      showToast('Testi predefiniti ripristinati nel form (clicca Salva per pubblicare).');
     });
 
     // =======================================================================
@@ -933,31 +909,32 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
         try {
           const optimized = await compressAndOptimizeImage(file);
           const newItem = {
-            id: Date.now() + Math.floor(Math.random() * 1000),
             name: optimized.name,
             category: 'Upload',
+            mime_type: optimized.mime_type,
             size_bytes: optimized.size_bytes,
             url: optimized.url
           };
-          cmsState.media.unshift(newItem);
-          saveLocalCmsState();
 
-          try {
-            await fetch('/api/cms', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${getAuthToken()}`
-              },
-              body: JSON.stringify({ resource: 'media', ...newItem })
-            });
-          } catch (_e) {}
+          const res = await fetch(`${API_BASE}/api/cms`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${getAuthToken()}`
+            },
+            body: JSON.stringify({ resource: 'media', ...newItem })
+          });
+
+          if (!res.ok) {
+            showToast(`Errore salvataggio Cloud per ${file.name}`, true);
+          }
         } catch (_err) {
           showToast(`Errore durante l'ottimizzazione di ${file.name}`, true);
         }
       }
+      await fetchCmsDataFromServer();
       renderMediaLibrary();
-      showToast('Immagini ottimizzate in WebP e salvate nella libreria!');
+      showToast('Immagini ottimizzate e salvate nella libreria Cloud!');
     }
 
     function renderMediaLibrary() {
@@ -999,17 +976,18 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
         btn.addEventListener('click', async () => {
           const id = Number(btn.getAttribute('data-del-media'));
           if (!window.confirm('Eliminare questa immagine dalla libreria?')) return;
-          cmsState.media = cmsState.media.filter(x => Number(x.id) !== id);
-          saveLocalCmsState();
-          renderMediaLibrary();
 
           try {
-            await fetch(`/api/cms?resource=media&id=${id}`, {
+            await fetch(`${API_BASE}/api/cms?resource=media&id=${id}`, {
               method: 'DELETE',
               headers: { Authorization: `Bearer ${getAuthToken()}` }
             });
-          } catch (_e) {}
-          showToast('Immagine rimossa.');
+            await fetchCmsDataFromServer();
+            renderMediaLibrary();
+            showToast('Immagine rimossa dalla libreria Cloud.');
+          } catch (_e) {
+            showToast('Errore durante la rimozione dell\'immagine.', true);
+          }
         });
       });
     }
@@ -1022,8 +1000,9 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
       if (!tbody) return;
 
       try {
-        const res = await fetch('/api/get-leads', {
-          headers: { Authorization: `Bearer ${getAuthToken()}` }
+        const res = await fetch(`${API_BASE}/api/get-leads?t=${Date.now()}`, {
+          headers: { Authorization: `Bearer ${getAuthToken()}` },
+          cache: 'no-store'
         });
         if (res.ok) {
           const data = await res.json();
@@ -1051,7 +1030,7 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
         }
       } catch (_e) {}
 
-      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-muted);">Collega la variabile POSTGRES_URL su Vercel per visualizzare i lead ricevuti in cloud.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-muted);">Impossibile caricare le richieste contatto in questo momento.</td></tr>`;
     }
 
     document.getElementById('btnRefreshLeads')?.addEventListener('click', fetchLeads);
@@ -1071,7 +1050,7 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
       }
 
       try {
-        const res = await fetch('/api/auth', {
+        const res = await fetch(`${API_BASE}/api/auth`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
