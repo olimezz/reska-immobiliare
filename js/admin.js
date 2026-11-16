@@ -394,6 +394,9 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
     // SINCRONIZZAZIONE CON SERVER / DATABASE
     // =======================================================================
     async function fetchCmsDataFromServer() {
+      const syncStatus = document.getElementById('cmsSyncStatus');
+      const dbNotice = document.getElementById('dbSyncNotice');
+
       try {
         const res = await fetch('/api/cms');
         if (res.ok) {
@@ -403,10 +406,34 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
             cmsState.settings = { ...INITIAL_SETTINGS, ...(data.settings || {}) };
             cmsState.media = data.media || INITIAL_MEDIA;
             saveLocalCmsState();
+
+            if (syncStatus) {
+              syncStatus.style.background = '#ECFDF5';
+              syncStatus.style.borderColor = '#A7F3D0';
+              syncStatus.style.color = '#047857';
+              syncStatus.innerHTML = '<span class="status-pill-dot" style="background:#10B981;"></span><span>Database Cloud Connesso</span>';
+            }
+            if (dbNotice) dbNotice.style.display = 'none';
+          } else {
+            // DB non collegato su Vercel (modalità locale)
+            if (syncStatus) {
+              syncStatus.style.background = '#FFFBEB';
+              syncStatus.style.borderColor = '#FCD34D';
+              syncStatus.style.color = '#B45309';
+              syncStatus.innerHTML = '<span class="status-pill-dot" style="background:#F59E0B;"></span><span>Modalità Locale (Solo questo dispositivo)</span>';
+            }
+            if (dbNotice) dbNotice.style.display = 'block';
           }
         }
       } catch (_e) {
         // Mantiene stato locale già caricato
+        if (syncStatus) {
+          syncStatus.style.background = '#FFFBEB';
+          syncStatus.style.borderColor = '#FCD34D';
+          syncStatus.style.color = '#B45309';
+          syncStatus.innerHTML = '<span class="status-pill-dot" style="background:#F59E0B;"></span><span>Modalità Locale</span>';
+        }
+        if (dbNotice) dbNotice.style.display = 'block';
       }
     }
 
