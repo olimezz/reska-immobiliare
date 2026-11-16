@@ -98,6 +98,97 @@ document.addEventListener('DOMContentLoaded', function () {
       image: 'images/casa2.webp',
       gallery: ['images/casa2.webp', 'images/casa2.jpg'],
       badge: 'Nuova Costruzione'
+    },
+    '3': {
+      id: 'PROP-03',
+      title: 'Quadrilocale Santa Filomena con Posto Auto',
+      location: 'Montesilvano (PE) • Corso Umberto I (Santa Filomena)',
+      price: '€ 150.000',
+      specs: '90 mq commerciali • 1° Piano • 4 Locali • 3 Camere • 1 Bagno • Balcone Perimetrale • Posto Auto',
+      description: `
+        <p>Montesilvano, nella ricercata e servitissima zona di <strong>Santa Filomena</strong> lungo <strong>Corso Umberto I</strong>, al confine con Pescara e a pochi minuti a piedi dal mare e da ogni servizio primario.</p>
+        <p>Proponiamo in vendita accogliente e luminoso <strong>appartamento quadrilocale di 90 mq</strong> al primo piano. La proprietà si distingue per un'eccellente distribuzione degli spazi interni:</p>
+        <ul>
+          <li>Ingresso con comodo disimpegno;</li>
+          <li>Tinello con funzionale cucinotto separato;</li>
+          <li>Tre ampie e luminose camere da letto matrimoniali;</li>
+          <li>Bagno finestrato e spazioso balcone perimetrale vivibile;</li>
+          <li>Comodo <strong>posto auto</strong> in area riservata.</li>
+        </ul>
+        <div class="ape-legal-spec">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span><strong>Attestato di Prestazione Energetica (D.Lgs. 192/2005):</strong> Classe F • Indice EPgl,nren: 142,50 kWh/m² anno.</span>
+        </div>
+      `,
+      image: 'images/property-1.jpg',
+      gallery: ['images/property-1.jpg'],
+      badge: 'In Evidenza'
+    },
+    '4': {
+      id: 'PROP-04',
+      title: 'Trilocale Porto Allegro con Terrazzo e Posto Auto',
+      location: 'Montesilvano (PE) • Zona Porto Allegro / Riviera',
+      price: 'Trattativa Riservata',
+      specs: '90 mq • 5° Piano con Ascensore • 3 Locali • 2 Camere • 2 Bagni • Terrazzo Vivibile Coperto • Posto Auto',
+      description: `
+        <p>A Montesilvano Spiaggia, nelle immediate vicinanze del centro commerciale <strong>Porto Allegro</strong>, a brevissima distanza a piedi dal mare e dalla pineta litoranea.</p>
+        <p>Proponiamo in vendita rifinito <strong>appartamento trilocale di 90 mq</strong> posizionato al quinto piano servito da ascensore:</p>
+        <ul>
+          <li>Luminosa zona giorno open space con cucina a vista e accesso diretto all'ampio <em>terrazzo abitabile coperto</em>;</li>
+          <li>Due camere da letto spaziose;</li>
+          <li>Doppi servizi igienici moderni;</li>
+          <li>Ulteriore balcone di servizio e <strong>posto auto assegnato</strong> in area condominiale recintata.</li>
+        </ul>
+        <div class="ape-legal-spec">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span><strong>Attestato di Prestazione Energetica (D.Lgs. 192/2005):</strong> Classe C • Indice EPgl,nren: 78,40 kWh/m² anno.</span>
+        </div>
+      `,
+      image: 'images/property-2.jpg',
+      gallery: ['images/property-2.jpg'],
+      badge: 'Esclusiva RESKA'
+    },
+    '5': {
+      id: 'PROP-05',
+      title: 'Bilocale Vista Mare - Silvi Marina',
+      location: 'Silvi Marina (TE) • Via Ticino',
+      price: 'Trattativa Riservata',
+      specs: '45 mq • 4° Piano con Ascensore • 2 Locali • 1 Camera • 1 Bagno • Terrazzo Vista Mare • Posto Auto',
+      description: `
+        <p>A <strong>Silvi Marina</strong>, in <strong>Via Ticino</strong>, a pochi passi a piedi dalla spiaggia e dal lungomare, proponiamo delizioso <strong>bilocale di 45 mq</strong> al quarto piano di una palazzina rinnovata con ascensore:</p>
+        <ul>
+          <li>Soggiorno con angolo cottura;</li>
+          <li>Ampia camera da letto matrimoniale;</li>
+          <li>Bagno completo e disimpegno;</li>
+          <li><strong>Splendido terrazzo abitabile panoramico con vista mare</strong>;</li>
+          <li>Posto auto nell'area condominiale riservata.</li>
+        </ul>
+        <div class="ape-legal-spec">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EAB308" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span><strong>Attestato di Prestazione Energetica (D.Lgs. 192/2005):</strong> Classe D • Indice EPgl,nren: 95,10 kWh/m² anno.</span>
+        </div>
+      `,
+      image: 'images/property-3.jpg',
+      gallery: ['images/property-3.jpg'],
+      badge: 'Investimento'
+    },
+    '6': {
+      id: 'PROP-06',
+      title: 'Locale Commerciale Via Arno - Montesilvano',
+      location: 'Montesilvano (PE) • Via Arno (Confine Pescara)',
+      price: 'Trattativa Riservata',
+      specs: '92 mq commerciali (80 mq coperti + 40 mq piazzale) • Piano Terra • 2 Vani • 2 Bagni • 3 Vetrine Fronte Strada',
+      description: `
+        <p>In posizione di altissimo passaggio a Montesilvano, in <strong>Via Arno</strong> a confine con Pescara.</p>
+        <p>Locale commerciale C/1 di 92 mq commerciali con 3 grandi vetrine fronte strada, piazzale privato esterno di 40 mq esclusivo per parcheggio clienti o carico-scarico e doppi servizi a norma.</p>
+        <div class="ape-legal-spec">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span><strong>Attestato di Prestazione Energetica (D.Lgs. 192/2005):</strong> Classe E • Indice EPgl,nren: 118,30 kWh/m² anno.</span>
+        </div>
+      `,
+      image: 'images/hero.jpg',
+      gallery: ['images/hero.jpg'],
+      badge: 'Commerciale'
     }
   };
 
