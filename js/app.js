@@ -143,11 +143,34 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // 4. Dynamic Property Media Sliders (Mobile-First Touch Swipe, Viewport Auto-Cycle & Desktop Hover)
+  let propertyIntersectionObserver = null;
+
   function initPropertyHoverSliders() {
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || window.matchMedia('(pointer: coarse)').matches;
+
+    if (!propertyIntersectionObserver && 'IntersectionObserver' in window) {
+      propertyIntersectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const card = entry.target;
+          const handler = card._sliderHandler;
+          if (!handler) return;
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+            handler.onInView(true);
+          } else if (!entry.isIntersecting || entry.intersectionRatio < 0.2) {
+            handler.onInView(false);
+          }
+        });
+      }, {
+        threshold: [0.15, 0.35, 0.6]
+      });
+    }
+
     document.querySelectorAll('.property-card').forEach(card => {
       if (card.dataset.hoverSliderBound === '1') return;
       card.dataset.hoverSliderBound = '1';
 
+      const imgWrapper = card.querySelector('.property-img-wrapper');
       const slides = Array.from(card.querySelectorAll('.property-media-slide'));
       const dots = Array.from(card.querySelectorAll('.property-slide-dot'));
       const progressBar = card.querySelector('.property-hover-progress-bar');
@@ -156,6 +179,10 @@ document.addEventListener('DOMContentLoaded', function () {
       let currentIdx = 0;
       let timerId = null;
       let isHovered = false;
+      let isInView = false;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchStartTime = 0;
 
       function activateSlide(nextIdx) {
         currentIdx = (nextIdx + slides.length) % slides.length;
@@ -163,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
           const isActive = idx === currentIdx;
           sl.classList.toggle('active', isActive);
           if (sl.tagName === 'VIDEO') {
-            if (isActive && isHovered) {
+            if (isActive && (isHovered || isInView)) {
               sl.currentTime = 0;
               sl.play().catch(() => {});
             } else {
@@ -178,10 +205,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
       function scheduleNextSlide(customDelayMs) {
         clearTimeout(timerId);
-        if (!isHovered) return;
+        const shouldRun = isHovered || (isTouchDevice && isInView);
+        if (!shouldRun) return;
 
         const activeSlide = slides[currentIdx];
-        const duration = customDelayMs || (activeSlide && activeSlide.tagName === 'VIDEO' ? 5200 : 1850);
+        const isVideo = activeSlide && activeSlide.tagName === 'VIDEO';
+        const duration = customDelayMs || (isVideo ? 5200 : (isTouchDevice ? 2700 : 1900));
 
         if (progressBar) {
           progressBar.style.transition = 'none';
@@ -192,41 +221,109 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         timerId = setTimeout(() => {
-          if (!isHovered) return;
+          const stillRunning = isHovered || (isTouchDevice && isInView);
+          if (!stillRunning) return;
           activateSlide(currentIdx + 1);
           scheduleNextSlide();
         }, duration);
       }
 
-      card.addEventListener('mouseenter', () => {
-        isHovered = true;
-        card.classList.add('is-sliding');
-        // Appena l'utente passa sopra col mouse (senza cliccare), ingrandisce e fa scorrere subito le foto/video
-        scheduleNextSlide(650);
-      });
-
-      card.addEventListener('mouseleave', () => {
-        isHovered = false;
-        card.classList.remove('is-sliding');
+      function stopSliding() {
         clearTimeout(timerId);
+        card.classList.remove('is-sliding');
         if (progressBar) {
           progressBar.style.transition = 'none';
           progressBar.style.width = '0%';
         }
-        activateSlide(0);
+        const activeSlide = slides[currentIdx];
+        if (activeSlide && activeSlide.tagName === 'VIDEO') {
+          activeSlide.pause();
+        }
+      }
+
+      card._sliderHandler = {
+        onInView: function (visible) {
+          isInView = visible;
+          if (visible) {
+            card.classList.add('is-sliding');
+            scheduleNextSlide(isTouchDevice ? 1500 : 2200);
+          } else {
+            if (!isHovered) {
+              stopSliding();
+            }
+          }
+        }
+      };
+
+      if (propertyIntersectionObserver) {
+        propertyIntersectionObserver.observe(card);
+      }
+
+      // Desktop Hover
+      card.addEventListener('mouseenter', () => {
+        isHovered = true;
+        card.classList.add('is-sliding');
+        scheduleNextSlide(550);
       });
 
+      card.addEventListener('mouseleave', () => {
+        isHovered = false;
+        if (!isInView || !isTouchDevice) {
+          stopSliding();
+          activateSlide(0);
+        }
+      });
+
+      // Mobile Touch Gestures (Swipe Left / Swipe Right)
+      if (imgWrapper) {
+        imgWrapper.addEventListener('touchstart', (e) => {
+          if (!e.touches || e.touches.length !== 1) return;
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          touchStartTime = Date.now();
+        }, { passive: true });
+
+        imgWrapper.addEventListener('touchend', (e) => {
+          if (!e.changedTouches || e.changedTouches.length !== 1) return;
+          const touchEndX = e.changedTouches[0].clientX;
+          const touchEndY = e.changedTouches[0].clientY;
+          const deltaX = touchEndX - touchStartX;
+          const deltaY = touchEndY - touchStartY;
+          const elapsed = Date.now() - touchStartTime;
+
+          // Se lo swipe orizzontale è netto
+          if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) && elapsed < 650) {
+            if (deltaX < 0) {
+              // Swipe a sinistra -> Prossima foto
+              activateSlide(currentIdx + 1);
+            } else {
+              // Swipe a destra -> Foto precedente
+              activateSlide(currentIdx - 1);
+            }
+            card.classList.add('is-sliding');
+            scheduleNextSlide(3200);
+          }
+        }, { passive: true });
+      }
+
+      // Dots Click & Touch
       dots.forEach((dot, idx) => {
-        dot.addEventListener('mouseenter', e => {
+        const handleDotSelect = (e) => {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          activateSlide(idx);
+          card.classList.add('is-sliding');
+          scheduleNextSlide(3200);
+        };
+
+        dot.addEventListener('click', handleDotSelect);
+        dot.addEventListener('touchend', handleDotSelect, { passive: false });
+        dot.addEventListener('mouseenter', (e) => {
           e.stopPropagation();
           activateSlide(idx);
-          scheduleNextSlide();
-        });
-        dot.addEventListener('click', e => {
-          e.preventDefault();
-          e.stopPropagation();
-          activateSlide(idx);
-          scheduleNextSlide();
+          scheduleNextSlide(1800);
         });
       });
     });
