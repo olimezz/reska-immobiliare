@@ -20,7 +20,9 @@ export const DEFAULT_PROPERTIES = [
     ape_epgl: '215,40 kWh/m² anno',
     main_image: 'images/palazzina-strada-parco.jpg',
     gallery: [
-      'images/palazzina-strada-parco.jpg'
+      'images/palazzina-strada-parco.jpg',
+      'images/palazzina-vista-frontale.jpg',
+      'images/palazzina-dettaglio-piani.jpg'
     ],
     description: `<p>Montesilvano, in posizione privilegiata e altamente strategica prospiciente la rinomata isola ciclo-pedonale della <strong>Strada Parco</strong>, a brevissima distanza dalla spiaggia e da tutti i principali servizi cittadini.</p>
 <p>Proponiamo prestigioso stabile cielo-terra anni '80 in ottime condizioni generali di manutenzione, disponibile per l'acquisto sia in blocco che con possibilità di frazionamento. La proprietà si articola su un livello seminterrato con comoda taverna e 3 ampi livelli fuori terra di circa 120 mq a piano, ideali per eleganti appartamenti indipendenti, studi professionali o attività ricettiva.</p>
@@ -45,7 +47,9 @@ export const DEFAULT_PROPERTIES = [
     main_image: 'images/casa2.webp',
     gallery: [
       'images/casa2.webp',
-      'images/casa2.jpg'
+      'images/trilocale-a4-video.mp4',
+      'images/casa2-render-notte.jpg',
+      'images/casa2-planimetria-3d.jpg'
     ],
     description: `<p>Nel cuore più servito e strategico di <strong>Montesilvano</strong>, in <strong>Via Marinelli</strong> — con accesso immediato a piedi a ogni servizio primario (supermercati, scuole, farmacie, fermate dei trasporti e a brevissima distanza dal mare e dalla Strada Parco) — proponiamo in vendita esclusivo <strong>appartamento trilocale in Classe Energetica A4</strong>, posizionato al terzo piano di un prestigioso edificio di nuova costruzione con linee architettoniche moderne e curate nei minimi dettagli.</p>
 <p><strong>Spazi Luminosi & Spettacolari Terrazzi Vivibili:</strong><br>

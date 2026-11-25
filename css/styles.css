@@ -1081,39 +1081,86 @@ select.form-control {
   border: 1px solid var(--border-light);
   display: flex;
   flex-direction: column;
-  transition: all var(--transition-normal);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.35s ease;
   position: relative;
 }
 
 .property-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-xl);
-  border-color: rgba(255, 102, 0, 0.3);
+  transform: translateY(-10px) scale(1.015);
+  box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.22), 0 0 0 2px rgba(255, 102, 0, 0.35);
+  border-color: rgba(255, 102, 0, 0.45);
 }
 
 .property-img-wrapper {
   position: relative;
-  height: 260px;
+  height: 270px;
   overflow: hidden;
   background-color: var(--secondary-dark);
 }
 
-.property-img {
+.property-media-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.property-img,
+.property-media-slide {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  transition: transform 0.5s ease;
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 0.55s ease-in-out, transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 1;
 }
 
-.property-card:hover .property-img {
-  transform: scale(1.03);
+.property-img:first-of-type,
+.property-media-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.property-card:hover .property-img,
+.property-card:hover .property-media-slide.active,
+.property-card.is-sliding .property-media-slide.active {
+  transform: scale(1.11);
+}
+
+.property-hover-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3.5px;
+  background: rgba(255, 255, 255, 0.18);
+  z-index: 6;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.property-card:hover .property-hover-progress,
+.property-card.is-sliding .property-hover-progress {
+  opacity: 1;
+}
+
+.property-hover-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #FF6600, #FFA366);
+  box-shadow: 0 0 8px rgba(255, 102, 0, 0.8);
 }
 
 .property-badge-status {
   position: absolute;
   top: 14px;
   left: 14px;
+  z-index: 5;
   background: var(--primary);
   color: var(--white);
   font-size: 0.75rem;
@@ -1129,6 +1176,7 @@ select.form-control {
   position: absolute;
   top: 14px;
   right: 14px;
+  z-index: 5;
   background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(6px);
   color: var(--white);
@@ -1139,16 +1187,92 @@ select.form-control {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.property-badge-media-live {
+  position: absolute;
+  top: 48px;
+  left: 14px;
+  z-index: 5;
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 163, 102, 0.45);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.property-badge-media-live .live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FF6600;
+  box-shadow: 0 0 6px #FF6600;
+  animation: pulseLiveDot 1.4s infinite;
+}
+
+@keyframes pulseLiveDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
 .property-price-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 24px 16px 10px 16px;
-  background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.85) 100%);
+  z-index: 5;
+  padding: 28px 16px 11px 16px;
+  background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.88) 100%);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
+  gap: 10px;
+}
+
+.property-slide-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.property-slide-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.42);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.property-slide-dot.is-video-dot {
+  width: auto;
+  height: 16px;
+  padding: 0 6px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(255, 102, 0, 0.65);
+}
+
+.property-slide-dot.active {
+  width: 20px;
+  background: #FF6600;
+  box-shadow: 0 0 8px rgba(255, 102, 0, 0.8);
+}
+
+.property-slide-dot.is-video-dot.active {
+  width: auto;
+  background: #FF6600;
+  transform: scale(1.08);
 }
 
 .property-price {

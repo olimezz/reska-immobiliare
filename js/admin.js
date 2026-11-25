@@ -27,7 +27,11 @@
       ape_class: 'G',
       ape_epgl: '215,40 kWh/m² anno',
       main_image: 'images/palazzina-strada-parco.jpg',
-      gallery: ['images/palazzina-strada-parco.jpg'],
+      gallery: [
+        'images/palazzina-strada-parco.jpg',
+        'images/palazzina-vista-frontale.jpg',
+        'images/palazzina-dettaglio-piani.jpg'
+      ],
       description: `<p>Montesilvano, in posizione privilegiata e altamente strategica prospiciente la rinomata isola ciclo-pedonale della <strong>Strada Parco</strong>, a brevissima distanza dalla spiaggia e da tutti i principali servizi cittadini.</p>
 <p>Proponiamo prestigioso stabile cielo-terra anni '80 in ottime condizioni generali di manutenzione, disponibile per l'acquisto sia in blocco che con possibilità di frazionamento. La proprietà si articola su un livello seminterrato con comoda taverna e 3 ampi livelli fuori terra di circa 120 mq a piano, ideali per eleganti appartamenti indipendenti, studi professionali o attività ricettiva.</p>
 <p>A coronare la palazzina, splendida mansarda con tetto in legno massello appena rifatto a nuovo (allo stato grezzo, pronta per finiture su misura). Straordinaria opportunità d'investimento ad altissimo potenziale di rivalutazione.</p>`,
@@ -48,7 +52,12 @@
       ape_class: 'A4',
       ape_epgl: '18,20 kWh/m² anno (NZEB)',
       main_image: 'images/casa2.webp',
-      gallery: ['images/casa2.webp', 'images/casa2.jpg'],
+      gallery: [
+        'images/casa2.webp',
+        'images/trilocale-a4-video.mp4',
+        'images/casa2-render-notte.jpg',
+        'images/casa2-planimetria-3d.jpg'
+      ],
       description: `<p>Nel cuore più servito e strategico di <strong>Montesilvano</strong>, in <strong>Via Marinelli</strong> — con accesso immediato a piedi a ogni servizio primario — proponiamo in vendita esclusivo <strong>appartamento trilocale in Classe Energetica A4</strong>, posizionato al terzo piano di un prestigioso edificio di nuova costruzione.</p>
 <p><strong>Spazi Luminosi & Spettacolari Terrazzi Vivibili:</strong><br>
 L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed è caratterizzato da soggiorno open space con angolo cottura, doppio terrazzo abitabile, camera matrimoniale con bagno privato en-suite, seconda camera e secondo bagno completo.</p>
@@ -520,13 +529,19 @@ L'appartamento sviluppa una superficie di <strong>100 mq commerciali</strong> ed
         return;
       }
 
-      container.innerHTML = currentEditingGallery.map((imgUrl, idx) => `
-        <div class="gallery-thumb-item ${idx === 0 ? 'is-main' : ''}" title="${idx === 0 ? 'Immagine Principale di Copertina' : 'Clicca sulla stella per impostare come principale'}">
-          <img src="${escapeHTML(imgUrl)}" alt="Foto ${idx + 1}">
-          ${idx === 0 ? '<span class="gallery-thumb-main-tag">Copertina</span>' : `<button type="button" class="gallery-thumb-main-tag" style="background: rgba(15,23,42,0.8); border:none; cursor:pointer;" data-make-main="${idx}">★ Copertina</button>`}
-          <button type="button" class="gallery-thumb-remove" data-remove-gal="${idx}" title="Rimuovi foto">✕</button>
-        </div>
-      `).join('');
+      container.innerHTML = currentEditingGallery.map((imgUrl, idx) => {
+        const isVid = /\.(mp4|mov|webm|m4v)(\?.*)?$/i.test(String(imgUrl || '')) || /^data:video\//i.test(String(imgUrl || ''));
+        return `
+          <div class="gallery-thumb-item ${idx === 0 ? 'is-main' : ''}" title="${idx === 0 ? 'Immagine Principale di Copertina' : 'Clicca sulla stella per impostare come principale'}">
+            ${isVid
+              ? `<video src="${escapeHTML(imgUrl)}" muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>`
+              : `<img src="${escapeHTML(imgUrl)}" alt="Foto ${idx + 1}">`
+            }
+            ${idx === 0 ? '<span class="gallery-thumb-main-tag">Copertina</span>' : `<button type="button" class="gallery-thumb-main-tag" style="background: rgba(15,23,42,0.8); border:none; cursor:pointer;" data-make-main="${idx}">${isVid ? '▶ Video' : '★ Copertina'}</button>`}
+            <button type="button" class="gallery-thumb-remove" data-remove-gal="${idx}" title="Rimuovi media">✕</button>
+          </div>
+        `;
+      }).join('');
 
       container.querySelectorAll('[data-remove-gal]').forEach(btn => {
         btn.addEventListener('click', () => {

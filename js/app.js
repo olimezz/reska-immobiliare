@@ -60,7 +60,11 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       `,
       image: 'images/palazzina-strada-parco.jpg',
-      gallery: ['images/palazzina-strada-parco.jpg'],
+      gallery: [
+        'images/palazzina-strada-parco.jpg',
+        'images/palazzina-vista-frontale.jpg',
+        'images/palazzina-dettaglio-piani.jpg'
+      ],
       badge: 'In Evidenza'
     },
     '2': {
@@ -96,14 +100,137 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       `,
       image: 'images/casa2.webp',
-      gallery: ['images/casa2.webp', 'images/casa2.jpg'],
+      gallery: [
+        'images/casa2.webp',
+        'images/trilocale-a4-video.mp4',
+        'images/casa2-render-notte.jpg',
+        'images/casa2-planimetria-3d.jpg'
+      ],
       badge: 'Nuova Costruzione'
     }
   };
 
-  // 4. Property Modal Handler & Dynamic CMS Sync
+  function isVideoMedia(src) {
+    return /\.(mp4|mov|webm|m4v)(\?.*)?$/i.test(String(src || '')) || /^data:video\//i.test(String(src || ''));
+  }
+
+  // 4. Property Modal Handler & Dynamic Hover Auto-Slideshow
   const propertyModal = document.getElementById('propertyModal');
   const propertyModalClose = document.getElementById('propertyModalClose');
+
+  function showModalMedia(src, title) {
+    const mainImgEl = document.getElementById('modalPropImg');
+    const mainVidEl = document.getElementById('modalPropVideo');
+    if (isVideoMedia(src)) {
+      if (mainImgEl) mainImgEl.style.display = 'none';
+      if (mainVidEl) {
+        mainVidEl.style.display = 'block';
+        mainVidEl.src = src;
+        mainVidEl.currentTime = 0;
+        mainVidEl.play().catch(() => {});
+      }
+    } else {
+      if (mainVidEl) {
+        mainVidEl.pause();
+        mainVidEl.removeAttribute('src');
+        mainVidEl.style.display = 'none';
+      }
+      if (mainImgEl) {
+        mainImgEl.style.display = 'block';
+        mainImgEl.src = src;
+        mainImgEl.alt = title || 'Immobile';
+      }
+    }
+  }
+
+  function initPropertyHoverSliders() {
+    document.querySelectorAll('.property-card').forEach(card => {
+      if (card.dataset.hoverSliderBound === '1') return;
+      card.dataset.hoverSliderBound = '1';
+
+      const slides = Array.from(card.querySelectorAll('.property-media-slide'));
+      const dots = Array.from(card.querySelectorAll('.property-slide-dot'));
+      const progressBar = card.querySelector('.property-hover-progress-bar');
+      if (slides.length <= 1) return;
+
+      let currentIdx = 0;
+      let timerId = null;
+      let isHovered = false;
+
+      function activateSlide(nextIdx) {
+        currentIdx = (nextIdx + slides.length) % slides.length;
+        slides.forEach((sl, idx) => {
+          const isActive = idx === currentIdx;
+          sl.classList.toggle('active', isActive);
+          if (sl.tagName === 'VIDEO') {
+            if (isActive && isHovered) {
+              sl.currentTime = 0;
+              sl.play().catch(() => {});
+            } else {
+              sl.pause();
+            }
+          }
+        });
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentIdx);
+        });
+      }
+
+      function scheduleNextSlide(customDelayMs) {
+        clearTimeout(timerId);
+        if (!isHovered) return;
+
+        const activeSlide = slides[currentIdx];
+        const duration = customDelayMs || (activeSlide && activeSlide.tagName === 'VIDEO' ? 5200 : 1850);
+
+        if (progressBar) {
+          progressBar.style.transition = 'none';
+          progressBar.style.width = '0%';
+          void progressBar.offsetWidth;
+          progressBar.style.transition = `width ${duration}ms linear`;
+          progressBar.style.width = '100%';
+        }
+
+        timerId = setTimeout(() => {
+          if (!isHovered) return;
+          activateSlide(currentIdx + 1);
+          scheduleNextSlide();
+        }, duration);
+      }
+
+      card.addEventListener('mouseenter', () => {
+        isHovered = true;
+        card.classList.add('is-sliding');
+        // Appena l'utente passa sopra col mouse (senza cliccare), ingrandisce e fa scorrere subito le foto/video
+        scheduleNextSlide(650);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        isHovered = false;
+        card.classList.remove('is-sliding');
+        clearTimeout(timerId);
+        if (progressBar) {
+          progressBar.style.transition = 'none';
+          progressBar.style.width = '0%';
+        }
+        activateSlide(0);
+      });
+
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('mouseenter', e => {
+          e.stopPropagation();
+          activateSlide(idx);
+          scheduleNextSlide();
+        });
+        dot.addEventListener('click', e => {
+          e.preventDefault();
+          e.stopPropagation();
+          activateSlide(idx);
+          scheduleNextSlide();
+        });
+      });
+    });
+  }
 
   function bindPropertyDetailButtons() {
     document.querySelectorAll('.btn-property-detail').forEach(btn => {
@@ -118,25 +245,31 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('modalPropPrice').textContent = prop.price;
         document.getElementById('modalPropSpecs').textContent = prop.specs;
         document.getElementById('modalPropDesc').innerHTML = prop.description;
-        const mainImgEl = document.getElementById('modalPropImg');
-        mainImgEl.src = prop.image;
-        mainImgEl.alt = prop.title;
         document.getElementById('modalPropBadge').textContent = prop.badge;
 
-        // Render gallery thumbnails if > 1 image
-        const galContainer = document.getElementById('modalPropGallery');
         const galleryList = Array.isArray(prop.gallery) && prop.gallery.length > 0 ? prop.gallery : [prop.image];
+        showModalMedia(galleryList[0], prop.title);
+
+        // Render gallery thumbnails (foto + video)
+        const galContainer = document.getElementById('modalPropGallery');
         if (galContainer) {
           if (galleryList.length > 1) {
             galContainer.style.display = 'flex';
-            galContainer.innerHTML = galleryList.map((imgSrc, i) => `
-              <button type="button" data-gal-src="${escapeHTML(imgSrc)}" style="border: 2px solid ${i === 0 ? '#FF6600' : 'transparent'}; border-radius: 8px; overflow: hidden; width: 72px; height: 52px; flex-shrink: 0; padding: 0; cursor: pointer; background: #0F172A;">
-                <img src="${escapeHTML(imgSrc)}" alt="Miniatura ${i + 1}" style="width: 100%; height: 100%; object-fit: cover;">
-              </button>
-            `).join('');
+            galContainer.innerHTML = galleryList.map((mediaSrc, i) => {
+              const isVid = isVideoMedia(mediaSrc);
+              return `
+                <button type="button" data-gal-src="${escapeHTML(mediaSrc)}" style="position: relative; border: 2px solid ${i === 0 ? '#FF6600' : 'transparent'}; border-radius: 8px; overflow: hidden; width: 78px; height: 54px; flex-shrink: 0; padding: 0; cursor: pointer; background: #0F172A;">
+                  ${isVid
+                    ? `<video src="${escapeHTML(mediaSrc)}" muted playsinline preload="metadata" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.75;"></video><span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 0.68rem; font-weight: 800; background: rgba(15,23,42,0.45);">▶ Video</span>`
+                    : `<img src="${escapeHTML(mediaSrc)}" alt="Miniatura ${i + 1}" style="width: 100%; height: 100%; object-fit: cover;">`
+                  }
+                </button>
+              `;
+            }).join('');
             galContainer.querySelectorAll('[data-gal-src]').forEach(thumbBtn => {
               thumbBtn.addEventListener('click', function () {
-                mainImgEl.src = this.getAttribute('data-gal-src');
+                const src = this.getAttribute('data-gal-src');
+                showModalMedia(src, prop.title);
                 galContainer.querySelectorAll('[data-gal-src]').forEach(b => (b.style.borderColor = 'transparent'));
                 this.style.borderColor = '#FF6600';
               });
@@ -158,6 +291,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   bindPropertyDetailButtons();
+  initPropertyHoverSliders();
 
   // Dynamic CMS Loader (aggiorna immobili e testi statici dal CMS No-Code)
   function applyCmsDataToPage(cmsData) {
@@ -179,6 +313,26 @@ document.addEventListener('DOMContentLoaded', function () {
             `Classe Energetica: ${apeClass}${p.ape_epgl ? ` (${p.ape_epgl})` : ''}`
           ].filter(Boolean);
 
+          let galleryArr = Array.isArray(p.gallery) && p.gallery.length > 0
+            ? [...p.gallery]
+            : [p.main_image || 'images/palazzina-strada-parco.jpg'];
+
+          // Assicura la galleria multimediale completa per gli immobili 1 e 2 se il DB aveva ancora la versione a 1-2 foto
+          if (Number(p.id) === 1 && galleryArr.length < 3) {
+            galleryArr = [
+              'images/palazzina-strada-parco.jpg',
+              'images/palazzina-vista-frontale.jpg',
+              'images/palazzina-dettaglio-piani.jpg'
+            ];
+          } else if (Number(p.id) === 2 && !galleryArr.includes('images/trilocale-a4-video.mp4')) {
+            galleryArr = [
+              'images/casa2.webp',
+              'images/trilocale-a4-video.mp4',
+              'images/casa2-render-notte.jpg',
+              'images/casa2-planimetria-3d.jpg'
+            ];
+          }
+
           propertiesData[idKey] = {
             id: p.code || `PROP-0${p.id}`,
             title: p.modal_title || p.title,
@@ -186,19 +340,44 @@ document.addEventListener('DOMContentLoaded', function () {
             price: p.price || 'Trattativa Riservata',
             specs: specsParts.join(' • '),
             description: `${p.description || ''}<div class="ape-legal-spec" style="margin-top: 12px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${isGreenApe ? '#059669' : '#DC2626'}" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span><strong>Attestato di Prestazione Energetica (D.Lgs. 192/2005):</strong> Classe ${escapeHTML(apeClass)} ${p.ape_epgl ? `• Indice EPgl,nren: ${escapeHTML(p.ape_epgl)}` : ''}</span></div>`,
-            image: p.main_image || 'images/palazzina-strada-parco.jpg',
-            gallery: Array.isArray(p.gallery) && p.gallery.length > 0 ? p.gallery : [p.main_image],
+            image: galleryArr[0] || p.main_image || 'images/palazzina-strada-parco.jpg',
+            gallery: galleryArr,
             badge: p.category || 'In Evidenza'
           };
 
+          const hasVideo = galleryArr.some(isVideoMedia);
+          const photoCount = galleryArr.filter(x => !isVideoMedia(x)).length;
+          const liveBadgeText = hasVideo
+            ? `▶ Video + ${photoCount} Foto • Scorri sopra`
+            : `${galleryArr.length} Foto • Scorri sopra`;
+
+          const slidesHtml = galleryArr.map((src, idx) => {
+            if (isVideoMedia(src)) {
+              return `<video src="${escapeHTML(src)}" class="property-media-slide${idx === 0 ? ' active' : ''}" muted loop playsinline preload="metadata"></video>`;
+            }
+            return `<img src="${escapeHTML(src)}" alt="${escapeHTML(p.title)} - ${idx + 1}" class="property-media-slide${idx === 0 ? ' active' : ''}" loading="lazy" width="600" height="400">`;
+          }).join('');
+
+          const dotsHtml = galleryArr.length > 1
+            ? `<div class="property-slide-dots">${galleryArr.map((src, idx) => {
+                const isVid = isVideoMedia(src);
+                return `<button type="button" class="property-slide-dot${idx === 0 ? ' active' : ''}${isVid ? ' is-video-dot' : ''}" data-slide-idx="${idx}" aria-label="Slide ${idx + 1}">${isVid ? '▶ Video' : ''}</button>`;
+              }).join('')}</div>`
+            : '';
+
           return `
-            <article class="property-card">
+            <article class="property-card" data-card-prop-id="${escapeHTML(idKey)}">
               <div class="property-img-wrapper">
-                <img src="${escapeHTML(p.main_image || 'images/palazzina-strada-parco.jpg')}" alt="${escapeHTML(p.title)}" class="property-img" loading="lazy" width="600" height="400">
+                <div class="property-hover-progress"><div class="property-hover-progress-bar"></div></div>
+                <div class="property-media-stage">
+                  ${slidesHtml}
+                </div>
                 <span class="property-badge-status">${escapeHTML(p.category || 'In Evidenza')}</span>
                 <span class="property-badge-energy ${isGreenApe ? 'badge-ape-a4' : 'badge-ape-g'}">APE: Classe ${escapeHTML(apeClass)}${p.ape_epgl ? ` • ${escapeHTML(p.ape_epgl.split(' ')[0])} kWh/m²a` : ''}</span>
+                ${galleryArr.length > 1 ? `<span class="property-badge-media-live"><span class="live-dot"></span><span>${escapeHTML(liveBadgeText)}</span></span>` : ''}
                 <div class="property-price-overlay">
                   <span class="property-price">${escapeHTML(p.price || 'Trattativa Riservata')}</span>
+                  ${dotsHtml}
                 </div>
               </div>
               <div class="property-body">
@@ -237,6 +416,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }).join('');
 
         bindPropertyDetailButtons();
+        initPropertyHoverSliders();
       }
     }
 
@@ -370,6 +550,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (propertyModalClose) {
     propertyModalClose.addEventListener('click', () => {
       propertyModal.classList.remove('active');
+      document.getElementById('modalPropVideo')?.pause();
       document.body.style.overflow = '';
     });
   }
@@ -379,6 +560,7 @@ document.addEventListener('DOMContentLoaded', function () {
     overlay.addEventListener('click', function (e) {
       if (e.target === this) {
         this.classList.remove('active');
+        document.getElementById('modalPropVideo')?.pause();
         document.body.style.overflow = '';
       }
     });
