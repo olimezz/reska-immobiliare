@@ -1053,63 +1053,121 @@ select.form-control {
 }
 
 /* ==========================================================================
-   EXCLUSIVE PREVIEW SECTION (VIDEO REEL 9:16 + IMMAGINE DINAMICA)
+   EXCLUSIVE PREVIEW SECTION (MOBILE-FIRST 9:16 REEL & COMPATTO)
    Nuova Costruzione in Arrivo • Montesilvano
    ========================================================================== */
 .preview-reel-section {
   background: linear-gradient(180deg, var(--bg-page) 0%, rgba(255, 102, 0, 0.04) 45%, var(--bg-page) 100%);
-  padding: 64px 0 48px 0;
+  padding: 24px 0 20px 0;
   position: relative;
   overflow: hidden;
 }
 
 @media (min-width: 768px) {
   .preview-reel-section {
-    padding: 84px 0 60px 0;
+    padding: 56px 0 44px 0;
   }
 }
 
 .preview-reel-header {
   text-align: center;
-  max-width: 680px;
-  margin: 0 auto 36px auto;
+  max-width: 580px;
+  margin: 0 auto 12px auto;
+  padding: 0 12px;
+}
+
+.preview-reel-header .badge-tag {
+  font-size: 0.6875rem;
+  padding: 3px 10px;
+  margin-bottom: 6px;
+  gap: 6px;
+}
+
+.preview-reel-header .section-title {
+  font-size: 1.25rem;
+  margin-bottom: 4px;
+  line-height: 1.25;
+}
+
+.preview-reel-header .section-subtitle {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .preview-reel-header .section-title {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  .preview-reel-header .section-subtitle {
+    font-size: 0.95rem;
+    max-width: 600px;
+  }
 }
 
 .preview-reel-wrap {
   position: relative;
-  max-width: 380px;
-  margin: 0 auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 12px;
 }
 
-/* Patina arancione luminosa dietro al video per confonderlo col sito */
+@media (min-width: 768px) {
+  .preview-reel-wrap {
+    flex-direction: row;
+    max-width: 720px;
+    margin: 0 auto;
+    gap: 36px;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.preview-media-outer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Patina arancione luminosa sfumata dietro al video */
 .preview-reel-aura {
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 460px;
-  height: 80%;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 102, 0, 0.35) 0%, rgba(255, 102, 0, 0.14) 50%, transparent 75%);
-  filter: blur(34px);
+  width: 120%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 102, 0, 0.38) 0%, rgba(255, 102, 0, 0.12) 55%, transparent 75%);
+  filter: blur(24px);
   z-index: 1;
   pointer-events: none;
 }
 
+/* Card Multimediale 9:16 - Progettata per stare tutta nello schermo del telefono */
 .preview-media-card {
   position: relative;
-  width: 100%;
+  width: min(220px, 60vw);
   aspect-ratio: 9 / 16;
-  border-radius: 28px;
+  border-radius: 20px;
   overflow: hidden;
   background-color: #0F172A;
-  box-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.28), 0 0 0 2px rgba(255, 102, 0, 0.38);
+  box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.25), 0 0 0 2px rgba(255, 102, 0, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.14);
   z-index: 2;
   touch-action: pan-y pinch-zoom;
+}
+
+@media (min-width: 768px) {
+  .preview-media-card {
+    width: 260px;
+    border-radius: 24px;
+  }
 }
 
 .preview-media-stage {
@@ -1127,7 +1185,7 @@ select.form-control {
   object-fit: cover;
   opacity: 0;
   transform: scale(1.02);
-  transition: opacity 0.75s cubic-bezier(0.25, 1, 0.5, 1), transform 3.2s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 3s cubic-bezier(0.25, 1, 0.5, 1);
   pointer-events: none;
   z-index: 1;
 }
@@ -1145,94 +1203,136 @@ select.form-control {
   inset: 0;
   pointer-events: none;
   z-index: 3;
-  background: linear-gradient(180deg, rgba(255, 102, 0, 0.14) 0%, rgba(255, 102, 0, 0.03) 22%, transparent 45%, transparent 70%, rgba(15, 23, 42, 0.65) 100%);
+  background: linear-gradient(180deg, rgba(255, 102, 0, 0.12) 0%, rgba(255, 102, 0, 0.02) 20%, transparent 45%, transparent 72%, rgba(15, 23, 42, 0.65) 100%);
 }
 
 .preview-story-bars {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  right: 14px;
+  top: 10px;
+  left: 10px;
+  right: 10px;
   display: flex;
-  gap: 6px;
+  gap: 4px;
   z-index: 5;
 }
 
 .preview-story-bar {
   flex: 1;
-  height: 3.5px;
-  background: rgba(255, 255, 255, 0.3);
+  height: 3px;
+  background: rgba(255, 255, 255, 0.35);
   border-radius: 999px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  touch-action: manipulation;
 }
 
 .preview-story-bar-fill {
   height: 100%;
   width: 0%;
   background: #FF6600;
-  box-shadow: 0 0 8px #FF6600;
+  box-shadow: 0 0 6px #FF6600;
   transition: width 0.1s linear;
 }
 
 .preview-reel-badge {
   position: absolute;
-  top: 26px;
-  left: 14px;
+  top: 20px;
+  left: 10px;
   z-index: 5;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: #FFFFFF;
-  font-size: 0.72rem;
+  font-size: 0.625rem;
   font-weight: 800;
-  padding: 5px 12px;
+  padding: 3px 8px;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 102, 0, 0.55);
+  border: 1px solid rgba(255, 102, 0, 0.5);
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 5px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   pointer-events: none;
 }
 
 .preview-reel-badge .live-dot {
-  width: 7px;
-  height: 7px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #FF6600;
-  box-shadow: 0 0 8px #FF6600;
+  box-shadow: 0 0 6px #FF6600;
   animation: pulseLiveDot 1.4s infinite;
 }
 
+/* Box descrittivo sottostante compatto */
 .preview-bottom-caption {
-  margin-top: 24px;
-  max-width: 580px;
+  max-width: 320px;
   text-align: center;
   background: var(--white);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  padding: 22px 24px;
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 6px;
   align-items: center;
   z-index: 2;
   position: relative;
 }
 
-.preview-bottom-caption p {
-  font-size: 0.9375rem;
-  color: var(--secondary-light);
-  line-height: 1.6;
+@media (min-width: 768px) {
+  .preview-bottom-caption {
+    max-width: 360px;
+    text-align: left;
+    align-items: flex-start;
+    padding: 20px 24px;
+    border-radius: var(--radius-lg);
+    gap: 12px;
+  }
 }
 
-.preview-bottom-caption .btn {
-  margin-top: 2px;
+.preview-caption-tag {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.preview-caption-text {
+  font-size: 0.78rem;
+  color: var(--secondary-light);
+  line-height: 1.42;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .preview-caption-text {
+    font-size: 0.906rem;
+    line-height: 1.6;
+  }
+}
+
+.btn-preview-cta {
+  padding: 7px 14px;
+  font-size: 0.78rem;
+  min-height: 36px;
+  border-radius: var(--radius-sm);
+  gap: 5px;
+}
+
+@media (min-width: 768px) {
+  .btn-preview-cta {
+    padding: 10px 18px;
+    font-size: 0.875rem;
+    min-height: 42px;
+  }
 }
 
 /* ==========================================================================

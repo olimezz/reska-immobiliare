@@ -333,61 +333,62 @@
   </section>
 
   <!-- ==========================================================================
-       EXCLUSIVE PREVIEW SECTION: NUOVA COSTRUZIONE IN ANTEPRIMA (VIDEO 9:16 + IMMAGINE DINAMICA)
+       EXCLUSIVE PREVIEW SECTION: NUOVA COSTRUZIONE IN ANTEPRIMA (MOBILE-FIRST 9:16)
        ========================================================================== -->
   <section class="section preview-reel-section" id="anteprima-nuova-costruzione">
     <div class="container">
-      <div class="section-header preview-reel-header">
+      <div class="preview-reel-header">
         <span class="badge-tag badge-tag-orange">
-          <span class="live-dot" style="width: 7px; height: 7px; border-radius: 50%; background: #FF6600; display: inline-block; box-shadow: 0 0 6px #FF6600;"></span>
+          <span class="live-dot" style="width: 6px; height: 6px; border-radius: 50%; background: #FF6600; display: inline-block; box-shadow: 0 0 6px #FF6600;"></span>
           Nuova Costruzione • A Breve
         </span>
-        <h2 class="section-title">Nuova Costruzione in Anteprima Esclusiva</h2>
+        <h2 class="section-title">Nuova Costruzione in Anteprima</h2>
         <p class="section-subtitle">
-          Un nuovo progetto residenziale di pregio attualmente in costruzione a Montesilvano. Guarda l'animazione di progetto in anteprima assoluta.
+          Progetto residenziale esclusivo in corso di realizzazione a Montesilvano.
         </p>
       </div>
 
       <div class="preview-reel-wrap">
-        <!-- Patina arancione sfumata d'atmosfera dietro al box video -->
-        <div class="preview-reel-aura"></div>
-
-        <!-- Card Multimediale Verticale in formato 9:16 con bordi stondati -->
-        <div class="preview-media-card" id="previewMediaCard">
-          <!-- Story Bars (Video / Disclaimer) -->
-          <div class="preview-story-bars">
-            <div class="preview-story-bar" data-preview-bar="0" title="Video di Progetto">
-              <div class="preview-story-bar-fill" id="previewBarFill0"></div>
+        <!-- Media Container 9:16 compatto per schermo smartphone con aura arancione -->
+        <div class="preview-media-outer">
+          <div class="preview-reel-aura"></div>
+          <div class="preview-media-card" id="previewMediaCard">
+            <!-- Story Bars (Video / Disclaimer) -->
+            <div class="preview-story-bars">
+              <div class="preview-story-bar" data-preview-bar="0" title="Video di Progetto">
+                <div class="preview-story-bar-fill" id="previewBarFill0"></div>
+              </div>
+              <div class="preview-story-bar" data-preview-bar="1" title="Note di Progetto">
+                <div class="preview-story-bar-fill" id="previewBarFill1"></div>
+              </div>
             </div>
-            <div class="preview-story-bar" data-preview-bar="1" title="Note di Progetto">
-              <div class="preview-story-bar-fill" id="previewBarFill1"></div>
+
+            <!-- Badge dinamico Live -->
+            <div class="preview-reel-badge" id="previewReelBadge">
+              <span class="live-dot"></span>
+              <span id="previewReelBadgeText">In Cantiere • Anteprima</span>
             </div>
-          </div>
 
-          <!-- Badge dinamico Live -->
-          <div class="preview-reel-badge" id="previewReelBadge">
-            <span class="live-dot"></span>
-            <span id="previewReelBadgeText">Nuova Costruzione • In Cantiere</span>
-          </div>
+            <!-- Stage multimediale 9:16 con video e immagine in sequenza automatica -->
+            <div class="preview-media-stage">
+              <video id="previewReelVideo" class="preview-slide active" src="images/video-reska-anteprima.mp4" playsinline muted preload="metadata"></video>
+              <img id="previewReelImg" class="preview-slide" src="images/immagine-reska-anteprima.jpg" alt="Video animato con intelligenza artificiale a scopo illustrativo: l'immobile reale sarà simile a quanto mostrato, ma non identico nei dettagli." loading="lazy" width="1080" height="1920">
+            </div>
 
-          <!-- Stage multimediale 9:16 con video e immagine in sequenza automatica -->
-          <div class="preview-media-stage">
-            <video id="previewReelVideo" class="preview-slide active" src="images/video-reska-anteprima.mp4" playsinline muted preload="metadata"></video>
-            <img id="previewReelImg" class="preview-slide" src="images/immagine-reska-anteprima.jpg" alt="Video animato con intelligenza artificiale a scopo illustrativo: l'immobile reale sarà simile a quanto mostrato, ma non identico nei dettagli. Visualizzazione progettuale orientativa." loading="lazy" width="1080" height="1920">
+            <!-- Patina arancione e sfumatura di profondità -->
+            <div class="preview-media-patina"></div>
           </div>
-
-          <!-- Patina arancione e sfumatura di profondità -->
-          <div class="preview-media-patina"></div>
         </div>
 
-        <!-- Frase esplicativa sotto il video -->
+        <!-- Box Descrittivo compatto sottostante -->
         <div class="preview-bottom-caption">
-          <p>
-            <strong>Attualmente in fase di costruzione:</strong> una nuova prestigiosa residenza a Montesilvano concepita con i più avanzati standard di efficienza energetica, ampie terrazze abitabili e finiture di alto livello. Contattaci per scoprire il progetto e prenotare la tua visita prima dell'inizio ufficiale delle vendite.
+          <span class="preview-caption-tag">In Corso di Costruzione</span>
+          <p class="preview-caption-text">
+            <strong>Attualmente in costruzione:</strong> residenza moderna ad alta efficienza con terrazzi abitabili e finiture di pregio.
           </p>
-          <a href="#heroLeadForm" class="btn btn-primary">
-            <span>Richiedi Informazioni in Anteprima</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          <a href="#heroLeadForm" class="btn btn-primary btn-preview-cta">
+            <span>Richiedi Info in Anteprima</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </a>
         </div>
       </div>
