@@ -388,6 +388,120 @@ document.addEventListener('DOMContentLoaded', function () {
 
   bindPropertyDetailButtons();
   initPropertyHoverSliders();
+  initPreviewReel();
+
+  // 5. Exclusive Preview Reel (Video 9:16 + Immagine Dinamica senza click)
+  function initPreviewReel() {
+    const video = document.getElementById('previewReelVideo');
+    const img = document.getElementById('previewReelImg');
+    const bar0 = document.getElementById('previewBarFill0');
+    const bar1 = document.getElementById('previewBarFill1');
+    const badgeText = document.getElementById('previewReelBadgeText');
+    const card = document.getElementById('previewMediaCard');
+    if (!video || !img || !bar0 || !bar1) return;
+
+    let currentSlide = 0; // 0 = Video, 1 = Immagine
+    let imgTimer = null;
+    let isInView = false;
+
+    function showSlide(index) {
+      currentSlide = index;
+      clearTimeout(imgTimer);
+
+      if (currentSlide === 0) {
+        // Mostra Video
+        img.classList.remove('active');
+        video.classList.add('active');
+        if (badgeText) badgeText.textContent = 'Nuova Costruzione • In Cantiere';
+
+        bar0.style.transition = 'none';
+        bar1.style.transition = 'none';
+        bar1.style.width = '0%';
+
+        video.currentTime = 0;
+        if (isInView) {
+          video.play().catch(() => {});
+        }
+      } else {
+        // Mostra Immagine di disclaimer orientativa
+        video.pause();
+        video.classList.remove('active');
+        img.classList.add('active');
+        if (badgeText) badgeText.textContent = 'Visualizzazione Progettuale';
+
+        bar0.style.transition = 'none';
+        bar0.style.width = '100%';
+
+        bar1.style.transition = 'none';
+        bar1.style.width = '0%';
+        void bar1.offsetWidth;
+        bar1.style.transition = 'width 6000ms linear';
+        bar1.style.width = '100%';
+
+        imgTimer = setTimeout(() => {
+          showSlide(0);
+        }, 6000);
+      }
+    }
+
+    // Aggiornamento fluido progress bar video in tempo reale
+    video.addEventListener('timeupdate', () => {
+      if (currentSlide === 0 && video.duration) {
+        const pct = Math.min(100, Math.max(0, (video.currentTime / video.duration) * 100));
+        bar0.style.width = `${pct}%`;
+      }
+    });
+
+    // Quando il video finisce -> passa all'immagine automaticamente
+    video.addEventListener('ended', () => {
+      showSlide(1);
+    });
+
+    // Se il video dura oltre il previsto, passa all'immagine
+    let videoSafetyTimeout = null;
+    video.addEventListener('play', () => {
+      clearTimeout(videoSafetyTimeout);
+      const safetyTime = (video.duration ? video.duration + 1 : 23) * 1000;
+      videoSafetyTimeout = setTimeout(() => {
+        if (currentSlide === 0) showSlide(1);
+      }, safetyTime);
+    });
+
+    // Controllo visibilità nello schermo (IntersectionObserver)
+    if ('IntersectionObserver' in window && card) {
+      const reelObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isInView = entry.isIntersecting && entry.intersectionRatio >= 0.25;
+          if (isInView) {
+            if (currentSlide === 0) {
+              video.play().catch(() => {});
+            }
+          } else {
+            video.pause();
+            clearTimeout(imgTimer);
+          }
+        });
+      }, { threshold: [0.1, 0.25, 0.6] });
+
+      reelObserver.observe(card);
+    }
+
+    // Story bars cliccabili / touch per navigare manualmente se l'utente vuole
+    const barWrap0 = document.querySelector('[data-preview-bar="0"]');
+    const barWrap1 = document.querySelector('[data-preview-bar="1"]');
+    if (barWrap0) {
+      barWrap0.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showSlide(0);
+      });
+    }
+    if (barWrap1) {
+      barWrap1.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showSlide(1);
+      });
+    }
+  }
 
   // Dynamic CMS Loader (aggiorna immobili e testi statici dal CMS No-Code)
   function applyCmsDataToPage(cmsData) {

@@ -1053,6 +1053,189 @@ select.form-control {
 }
 
 /* ==========================================================================
+   EXCLUSIVE PREVIEW SECTION (VIDEO REEL 9:16 + IMMAGINE DINAMICA)
+   Nuova Costruzione in Arrivo • Montesilvano
+   ========================================================================== */
+.preview-reel-section {
+  background: linear-gradient(180deg, var(--bg-page) 0%, rgba(255, 102, 0, 0.04) 45%, var(--bg-page) 100%);
+  padding: 64px 0 48px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .preview-reel-section {
+    padding: 84px 0 60px 0;
+  }
+}
+
+.preview-reel-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 36px auto;
+}
+
+.preview-reel-wrap {
+  position: relative;
+  max-width: 380px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Patina arancione luminosa dietro al video per confonderlo col sito */
+.preview-reel-aura {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 460px;
+  height: 80%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 102, 0, 0.35) 0%, rgba(255, 102, 0, 0.14) 50%, transparent 75%);
+  filter: blur(34px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.preview-media-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 28px;
+  overflow: hidden;
+  background-color: #0F172A;
+  box-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.28), 0 0 0 2px rgba(255, 102, 0, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  z-index: 2;
+  touch-action: pan-y pinch-zoom;
+}
+
+.preview-media-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.preview-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 0.75s cubic-bezier(0.25, 1, 0.5, 1), transform 3.2s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.preview-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  z-index: 2;
+}
+
+/* Patina arancione interna sfumata per armonizzarlo con i colori del brand */
+.preview-media-patina {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background: linear-gradient(180deg, rgba(255, 102, 0, 0.14) 0%, rgba(255, 102, 0, 0.03) 22%, transparent 45%, transparent 70%, rgba(15, 23, 42, 0.65) 100%);
+}
+
+.preview-story-bars {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  gap: 6px;
+  z-index: 5;
+}
+
+.preview-story-bar {
+  flex: 1;
+  height: 3.5px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.preview-story-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: #FF6600;
+  box-shadow: 0 0 8px #FF6600;
+  transition: width 0.1s linear;
+}
+
+.preview-reel-badge {
+  position: absolute;
+  top: 26px;
+  left: 14px;
+  z-index: 5;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 102, 0, 0.55);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+.preview-reel-badge .live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #FF6600;
+  box-shadow: 0 0 8px #FF6600;
+  animation: pulseLiveDot 1.4s infinite;
+}
+
+.preview-bottom-caption {
+  margin-top: 24px;
+  max-width: 580px;
+  text-align: center;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  z-index: 2;
+  position: relative;
+}
+
+.preview-bottom-caption p {
+  font-size: 0.9375rem;
+  color: var(--secondary-light);
+  line-height: 1.6;
+}
+
+.preview-bottom-caption .btn {
+  margin-top: 2px;
+}
+
+/* ==========================================================================
    FEATURED PROPERTIES SHOWCASE (VETRINA 3 IMMOBILI)
    ========================================================================== */
 .properties-section {
