@@ -69,6 +69,15 @@ async function initCmsDatabase() {
     }
   }
 
+  // Cleanup: ensure video is removed from cms_properties gallery if previously seeded
+  try {
+    await sql`
+      UPDATE cms_properties
+      SET gallery = '["images/casa2.webp", "images/casa2-render-notte.jpg", "images/casa2-planimetria-3d.jpg"]'::jsonb
+      WHERE id = 2 AND gallery::text LIKE '%trilocale-a4-video.mp4%';
+    `;
+  } catch (_) {}
+
   // Seed default settings if empty
   const { rows: setCount } = await sql`SELECT COUNT(*)::int AS cnt FROM cms_settings;`;
   if (!setCount[0] || setCount[0].cnt === 0) {

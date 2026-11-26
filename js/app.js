@@ -102,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
       image: 'images/casa2.webp',
       gallery: [
         'images/casa2.webp',
-        'images/trilocale-a4-video.mp4',
         'images/casa2-render-notte.jpg',
         'images/casa2-planimetria-3d.jpg'
       ],
@@ -411,7 +410,7 @@ document.addEventListener('DOMContentLoaded', function () {
           ].filter(Boolean);
 
           let galleryArr = Array.isArray(p.gallery) && p.gallery.length > 0
-            ? [...p.gallery]
+            ? [...p.gallery].filter(x => !String(x).includes('trilocale-a4-video.mp4'))
             : [p.main_image || 'images/palazzina-strada-parco.jpg'];
 
           // Assicura la galleria multimediale completa per gli immobili 1 e 2 se il DB aveva ancora la versione a 1-2 foto
@@ -421,10 +420,9 @@ document.addEventListener('DOMContentLoaded', function () {
               'images/palazzina-vista-frontale.jpg',
               'images/palazzina-dettaglio-piani.jpg'
             ];
-          } else if (Number(p.id) === 2 && !galleryArr.includes('images/trilocale-a4-video.mp4')) {
+          } else if (Number(p.id) === 2 && galleryArr.length < 3) {
             galleryArr = [
               'images/casa2.webp',
-              'images/trilocale-a4-video.mp4',
               'images/casa2-render-notte.jpg',
               'images/casa2-planimetria-3d.jpg'
             ];

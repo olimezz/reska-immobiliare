@@ -54,7 +54,6 @@
       main_image: 'images/casa2.webp',
       gallery: [
         'images/casa2.webp',
-        'images/trilocale-a4-video.mp4',
         'images/casa2-render-notte.jpg',
         'images/casa2-planimetria-3d.jpg'
       ],
